@@ -20,4 +20,9 @@ class RecipeStatus extends Model
         'name',
         'description',
     ];
+
+    public function spaceProjectId()
+    {
+       return $this->belongsTo(SpaceProject::class);
+    }
 }

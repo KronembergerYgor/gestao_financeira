@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\RecipeStatus;
+use App\Models\RevenuesAndExpenses;
 
 class SpaceProject extends Model
 {
@@ -20,4 +22,19 @@ class SpaceProject extends Model
         'name',
         'description'
     ];
+
+    public function responsibleUser()
+    {
+       return $this->hasOne(User::class);
+    }
+
+    public function recipeStatusId()
+    {
+       return $this->hasOne(RecipeStatus::class);
+    }
+
+    public function revenuesAndExpensesId()
+    {
+        return $this->belongsTo(RevenuesAndExpenses::class);
+    }
 }

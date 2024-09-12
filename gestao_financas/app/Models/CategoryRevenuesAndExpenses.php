@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\RevenuesAndExpenses;
 
 class CategoryRevenuesAndExpenses extends Model
 {
@@ -21,6 +22,12 @@ class CategoryRevenuesAndExpenses extends Model
          'name',
          'description',
      ];
+
+     public function revenuesAndExpensesId()
+     {
+        return $this->hasOne(RevenuesAndExpenses::class);
+     }
+
 
 
 }

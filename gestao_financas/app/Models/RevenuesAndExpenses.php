@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\SpaceProject;
+use App\Models\CategoryRevenuesAndExpenses;
 
 class RevenuesAndExpenses extends Model
 {
@@ -22,4 +24,14 @@ class RevenuesAndExpenses extends Model
         'type',
         'value'
     ];
+
+    public function spaceProjectId()
+    {
+       return $this->hasOne(SpaceProject::class);
+    }
+
+    public function categoryId()
+    {
+       return $this->hasOne(CategoryRevenuesAndExpenses::class);
+    }
 }
