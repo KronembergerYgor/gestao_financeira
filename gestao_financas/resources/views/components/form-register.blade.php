@@ -30,7 +30,7 @@
             
         </div>
         <div class="col-12">
-            <div class="input-group mb-5 mt-1">
+            <div class="input-group mb-4 mt-1">
                 <input type="file" class="form-control" id="exampleFormControlFile1">
             </div>
         </div>
