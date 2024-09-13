@@ -6,9 +6,9 @@
 
 <div class="container d-flex align-items-center justify-content-center min-vh-100">
 
-    <div class='boxLogin border rounded p-5 w-50'>
+    <div class='boxLogin border rounded shadow-lg p-5 w-50'>
         <div class='title text-center mb-3'>
-            <h1>Bem Vindo</h1>
+            <h1><i class="bi bi-diagram-2"></i> Bem Vindo</h1>
         </div>
         <hr>
 
