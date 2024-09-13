@@ -19,7 +19,7 @@
      
     }
 
-    .boxPassword div button {
+    .boxPassword div a {
         font-size: 14px;
         border-radius: 2px;
         padding: 0.3rem 2.1rem;
