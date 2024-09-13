@@ -26,7 +26,7 @@
     </div>
 
     <div class='col'>
-        <a type="button" class="btn btn-secondary" href='{{route('RegisterUser.index')}}'>{{$titleButton}}</a>
+        <a type="button" class="btn btn-primary" href='{{route('RegisterUser.index')}}'>{{$titleButton}}</a>
     </div>
 
 </form>

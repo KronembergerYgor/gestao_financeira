@@ -33,7 +33,7 @@
                 <a href="#">Esqueceu a senha?</a> 
             </div>
             <div class='col'>
-                <a type="button" class="btn btn-primary" href='{{route('RegisterUser.index')}}'>Cadastre-se</a>
+                <a type="button" class="btn btn-secondary" href='{{route('RegisterUser.index')}}'>Cadastre-se</a>
             </div>
         </div>
     </div>
