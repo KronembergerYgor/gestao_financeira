@@ -7,9 +7,7 @@
 <div class="container d-flex align-items-center justify-content-center min-vh-100">
 
     <div class='boxLogin border rounded shadow-lg p-5 w-50 m-5'>
-        <div class='title text-center mb-3'>
-            <h1><i class="bi bi-diagram-2"></i> Bem Vindo</h1>
-        </div>
+        <x-title-forms-users title=" Bem Vindo" icon='<i class="bi bi-diagram-2"></i>'></x-form-register>
         <hr>
 
         <form action="/#" method="POST">
