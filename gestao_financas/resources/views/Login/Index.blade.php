@@ -6,7 +6,7 @@
 
 <div class="container d-flex align-items-center justify-content-center min-vh-100">
 
-    <div class='boxLogin border rounded shadow-lg p-5 w-50'>
+    <div class='boxLogin border rounded shadow-lg p-5 w-50 m-5'>
         <div class='title text-center mb-3'>
             <h1><i class="bi bi-diagram-2"></i> Bem Vindo</h1>
         </div>
@@ -30,10 +30,10 @@
 
         <div class='boxPassword row'>
             <div class="rememberPassword col d-flex justify-content-center">
-                <p class=''>Esqueceu a senha? <a href="#"> Clique aqui</a> </p>
+                <a href="#">Esqueceu a senha?</a> 
             </div>
             <div class='col'>
-                <button type="button" class="btn btn-secondary">Cadastre-se</button>
+                <a type="button" class="btn btn-primary" href='{{route('RegisterUser.index')}}'>Cadastre-se</a>
             </div>
         </div>
     </div>
