@@ -17,7 +17,7 @@
 
         <hr>
 
-        <x-form-register route="login.index" method="POST" titleButton="Cadastrar"></x-form-register>
+        <x-form-register route="RegisterUser.save" method="POST" titleButton="Cadastrar"></x-form-register>
 
         <hr>
     </div>

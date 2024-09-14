@@ -11,5 +11,11 @@ Route::get('/', function () {
 
 
 Route::get('/Login', [LoginController::class, 'index'])->name('login.index');
-Route::get('/Cadastrar', [RegisterController::class, 'index'])->name('RegisterUser.index');
+Route::prefix('Register')->group(function () {
+    Route::get('/', [RegisterController::class, 'index'])->name('RegisterUser.index');
+    Route::post('/Save', [RegisterController::class, 'save'])->name('RegisterUser.save');
+});
+
+
+
 

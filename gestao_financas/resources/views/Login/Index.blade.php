@@ -4,6 +4,13 @@
 
 @section('conteudo')
 
+@if (session('success'))
+    <div class="alert alert-success float-end floating-content position-absolute">
+        {{ session('success') }}
+    </div>
+@endif
+
+
 <div class="container d-flex align-items-center justify-content-center min-vh-100">
 
     <div class='boxLogin border rounded shadow-lg p-5 w-50 m-5'>
