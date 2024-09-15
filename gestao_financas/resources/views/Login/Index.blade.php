@@ -8,6 +8,10 @@
     <div class="alert alert-success float-end floating-content position-absolute">
         {{ session('success') }}
     </div>
+@if (session('error'))
+    <div class="alert alert-danger float-end floating-content position-absolute">
+        {{ session('error') }}
+    </div>
 @endif
 
 

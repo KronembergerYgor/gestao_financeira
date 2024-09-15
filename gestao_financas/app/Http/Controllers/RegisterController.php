@@ -18,12 +18,27 @@ class RegisterController extends Controller
     {
         $dados = $request->all();
 
+        $request->validate([
+            'nameUser'  => 'required',
+            'email'     => 'required|email|unique:users',
+            'password'  => 'required',
+            'confirmPassword' => 'required|same:password'
+        ], [
+            'nameUser.required' => 'O nome deve ser obrigatório.',
+            'email.required'    => 'O email deve ser obrigatório',
+            'email.email' => 'Forneça um endereço de email válido.',
+            'email.unique' => 'Este email já está cadastrado.',
+            'password.required' => 'A senha é obrigatória.',
+            'confirmPassword.same' => 'Erro na confirmação de senha, tenta novamente',
+            'confirmPassword.required' => 'A confirmação de senha deve ser realizada'
+        ]);
+
+        dd("caiu");
+
+        //Verificando arquivo de imagem
         if($request->hasFile('imageUser')){
             $dados['imageUser'] = self::generate_name_image($request, $dados);
         }
-
-
-
 
         // Criação do novo registro
         User::create([
@@ -33,11 +48,6 @@ class RegisterController extends Controller
             'photo' => $dados['imageUser'],
         ]);
 
-
-        // $request->session()->flash('alert', 'Operação realizada com sucesso!');
- 
-     
-        // return view('RegisterUser.Index');
         return redirect()->route('login.index')->with('success', 'Registro criado com sucesso!');
     }
 

@@ -4,6 +4,18 @@
 
 @section('conteudo')
 
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            {{-- {{dd($errors->al())}} --}}
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+
+@endif
+
 <div class="container d-flex align-items-center justify-content-center min-vh-100">
 
     <div class='boxLogin border rounded shadow-lg p-5 w-75 m-5'>
