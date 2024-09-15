@@ -33,8 +33,6 @@ class RegisterController extends Controller
             'confirmPassword.required' => 'A confirmação de senha deve ser realizada'
         ]);
 
-        dd("caiu");
-
         //Verificando arquivo de imagem
         if($request->hasFile('imageUser')){
             $dados['imageUser'] = self::generate_name_image($request, $dados);
