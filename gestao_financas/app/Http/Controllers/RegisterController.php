@@ -33,10 +33,7 @@ class RegisterController extends Controller
             'confirmPassword.required' => 'A confirmação de senha deve ser realizada'
         ]);
 
-        //Verificando arquivo de imagem
-        if($request->hasFile('imageUser')){
-            $dados['imageUser'] = self::generate_name_image($request, $dados);
-        }
+        $dados['imageUser'] = self::validate_image_user($request);
 
         // Criação do novo registro
         User::create([
@@ -50,7 +47,7 @@ class RegisterController extends Controller
     }
 
 
-    public function generate_name_image($request, $dados){
+    public function generate_name_image($request){
     
         $imagem = $request->file('imageUser');             //Traz o arquivo para do formulario
         $num = rand(1111,9999);                         // gerando número randomico para o nome do arquivo
@@ -61,5 +58,21 @@ class RegisterController extends Controller
         $caminhoImagem =  $dir . "/" . $nomeImagem;
 
         return $caminhoImagem;
+    }
+
+    public function validate_image_user($request){
+
+        //Verificando arquivo de imagem
+        if(isset($request->imageUser)){
+            if($request->hasFile('imageUser')){
+               $imageUser = self::generate_name_image($request);
+            }else{
+                $imageUser = null;
+            }
+        }else{
+            $imageUser = null;
+        }
+
+        return $imageUser;
     }
 }
