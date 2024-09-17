@@ -31,6 +31,19 @@
         padding: 1rem 5rem;
     }
 
+    .welcomeText p{
+        margin: 0.3rem 0;
+        padding: 0;
+    }
+
+    .welcomeText h4{
+        margin-bottom:1rem;
+    }
+
+    .welcomeText{
+        padding: 0.5rem;
+    }
+
   
 
 

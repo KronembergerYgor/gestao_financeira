@@ -1,20 +1,40 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Middleware\checkAuth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+//Login
+Route::prefix('Login')->group(function () {
+    Route::get('/', [LoginController::class, 'index'])->name('login.index');
+    Route::post('/Enter', [LoginController::class, 'loginEnter'])->name('login.enter');
 });
 
-
-
-Route::get('/Login', [LoginController::class, 'index'])->name('login.index');
+//Cadastro
 Route::prefix('Register')->group(function () {
     Route::get('/', [RegisterController::class, 'index'])->name('RegisterUser.index');
     Route::post('/Save', [RegisterController::class, 'save'])->name('RegisterUser.save');
 });
+
+Route::middleware([checkAuth::class])->group(function () { //Autenticação de Login
+
+    Route::prefix('Logout')->group(function () {
+        Route::post('/', [LoginController::class, 'logout'])->name('logout');
+    });
+    
+    Route::prefix('home')->group(function () {
+        Route::get('/', [HomeController::class, 'index'])->name('home.index');
+    });
+
+});
+
+
+
+
+
+
 
 
 
