@@ -1,31 +1,28 @@
 <style>
-    /* Estilos Gerias */
+    /* ------------ Estilos Gerias ------------ */
     body, html {
         width: 100%;
         height: 100%;
     }
 
-    /* Estilo body */
-
+    /* ------------ Estilo body ------------ */
     body {
         background-color: #d5d5d5;
     }
+    /* -------------------------------------*/
 
-    /* Login estilos */
-
+    /* ------------ Login ------------*/
     .boxLogin {
         background-color: #ffffff;
         text-align: center;
      
     }
-
     .boxPassword div a {
         font-size: 14px;
         border-radius: 2px;
         padding: 0.3rem 2.1rem;
         width: 100%
     }
-
 
     .boxLogin form {
         padding: 1rem 5rem;
@@ -43,6 +40,7 @@
     .welcomeText{
         padding: 0.5rem;
     }
+    /* -------------------------------------*/
 
   
 

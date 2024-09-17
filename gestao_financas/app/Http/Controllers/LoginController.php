@@ -10,14 +10,14 @@ class LoginController extends Controller
 {
     public function index(): View
     {
-        return view('Login.Index');
+        return view('Login.Index'); //Retorna a view de Login
   
     }
 
     public function loginEnter(Request $request){
 
         // Validar os dados do formulário
-        $credentials = $request->validate([
+        $credentials = $request->validate([ // Realiza as validações dos campos para realizar o login
             'email' => ['required', 'email'],
             'password' => ['required'],
         ], [

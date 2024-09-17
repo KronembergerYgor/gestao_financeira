@@ -11,14 +11,14 @@ class RegisterController extends Controller
 {
     public function index(): View
     {
-        return view('RegisterUser.Index');
+        return view('RegisterUser.Index'); // Retorna a view de cadastro
     }
 
     public function save(Request $request)
     {
-        $dados = $request->all();
+        $dados = $request->all(); //Retorna todos os dados em um array
 
-        $request->validate([
+        $request->validate([ //Valida os campos do formulário de cadastro
             'nameUser'  => 'required',
             'email'     => 'required|email|unique:users',
             'password'  => 'required',
@@ -33,7 +33,7 @@ class RegisterController extends Controller
             'confirmPassword.required' => 'A confirmação de senha deve ser realizada'
         ]);
 
-        $dados['imageUser'] = self::validate_image_user($request);
+        $dados['imageUser'] = self::validate_image_user($request); //Gera um nome para a imagem anexada
 
         // Criação do novo registro
         User::create([
@@ -49,7 +49,7 @@ class RegisterController extends Controller
 
     public function generate_name_image($request){
     
-        $imagem = $request->file('imageUser');             //Traz o arquivo para do formulario
+        $imagem = $request->file('imageUser');           //Traz o arquivo para do formulario
         $num = rand(1111,9999);                         // gerando número randomico para o nome do arquivo
         $dir = "img/cursos/";                           // diretorio de imagem
         $exte = $imagem->guessClientExtension();        // pegando extensão do arquivo
