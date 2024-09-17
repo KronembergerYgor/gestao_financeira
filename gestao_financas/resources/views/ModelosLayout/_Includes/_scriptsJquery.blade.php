@@ -5,4 +5,11 @@
             $('#alert-message').fadeOut('slow');
         }, 3000); // 3000 milissegundos = 3 segundos
     });
+
+    $(document).ready(function() {
+        $('.toggle-btn').click(function() {
+            $('#sidebar').toggleClass('collapsed');
+            $('#content').toggleClass('expanded');
+        });
+    });
 </script>

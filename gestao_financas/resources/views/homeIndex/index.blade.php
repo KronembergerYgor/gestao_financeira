@@ -1,4 +1,14 @@
-<form action="{{ route('logout') }}" method="POST">
-    @csrf
-    <button type="submit">Sair</button>
-</form>
+@extends('ModelosLayout.site')
+
+@section('titulo', 'Login')
+
+@section('conteudo')
+
+<x-menu-site></x-menu-site>
+
+
+
+
+
+
+
