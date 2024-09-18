@@ -10,8 +10,8 @@
     
     <ul>
         <hr>
-        <li><a href="#home">Início</a></li>
-        <li><a href="#services">Projetos</a></li>
+        <li><a href="{{route('home.index')}}">Início</a></li>
+        <li><a href="{{route('spaceProject.index')}}">Projetos</a></li>
         <li><a href="#about">Cadastrar projetos</a></li>
         <hr>
         <li>

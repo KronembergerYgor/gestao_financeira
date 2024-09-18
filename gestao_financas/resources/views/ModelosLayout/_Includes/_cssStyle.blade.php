@@ -54,7 +54,8 @@
     top: 0;
     left: 0;
     transition: width 0.3s ease;
-    z-index: 1000; /* Garante que a sidebar fique acima de outros elementos */
+    position: fixed;
+    /* z-index: 1000; Garante que a sidebar fique acima de outros elementos */
 }
 
 .sidebar.collapsed {
@@ -108,7 +109,7 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    z-index: 1001; /* Garante que o botão fique acima da sidebar */
+    z-index: 1001; Garante que o botão fique acima da sidebar
     transition: all 0.3s ease;
 }
 
@@ -129,6 +130,17 @@
 .sidebar.collapsed hr {
     opacity: 0;
     visibility: hidden;
+}
+
+/* Ajustar o conteúdo para o lado da sidebar */
+.content {
+    margin-left: 300px; /* Alinhar ao lado da sidebar */
+    transition: margin-left 0.3s ease;
+}
+
+/* Quando a sidebar estiver colapsada, o conteúdo se ajusta */
+.sidebar.collapsed ~ .content {
+    margin-left: 100px;
 }
 
   

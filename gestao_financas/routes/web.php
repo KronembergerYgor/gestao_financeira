@@ -3,7 +3,9 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SpaceProjectController;
 use App\Http\Middleware\checkAuth;
+use App\Models\SpaceProject;
 use Illuminate\Support\Facades\Route;
 
 //Login
@@ -26,6 +28,18 @@ Route::middleware([checkAuth::class])->group(function () { //Autenticação de L
     
     Route::prefix('home')->group(function () {
         Route::get('/', [HomeController::class, 'index'])->name('home.index');
+    });
+
+    Route::prefix('SpaceProject')->group(function () {
+        Route::get('/', [SpaceProjectController::class, 'index'])->name('spaceProject.index');
+        Route::prefix('RegisterProject')->group(function () {
+            
+            Route::get('/', [SpaceProjectController::class, 'registerProject'])->name('spaceProject.registerProject');
+
+            Route::post('/Save', [SpaceProjectController::class, 'save'])->name('spaceProject.registerProject.save');
+
+
+        });
     });
 
 });

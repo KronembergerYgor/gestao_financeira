@@ -20,7 +20,9 @@ class SpaceProject extends Model
     // Se você quiser definir quais campos são atribuíveis em massa
     protected $fillable = [
         'name',
-        'description'
+        'description',
+        'responsible_user',
+        'recipe_status_id'
     ];
 
     public function responsibleUser()
