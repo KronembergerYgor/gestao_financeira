@@ -42,5 +42,31 @@ class SpaceProjectController extends Controller
        return SpaceProject::where('responsible_user', Auth::user()->id)->get();
     }
 
+    public function destroy($id){
+        $registro = SpaceProject::findOrFail($id); // Localiza o registro pelo ID
+        $registro->delete(); // Deleta o registro
+
+        return redirect()->back()->with('success', 'Registro deletado com sucesso!');
+    }
+    
+    public function edit($id){
+        $project = SpaceProject::where('id', $id)->first();
+
+        return view('spaceProject.edit', ['project' => $project]);
+  
+    }
+
+    public function update(Request $request, $id){
+
+
+        SpaceProject::where('id', $id)
+        ->update([
+            'name' => $request->nameProject,
+            'description' => $request->descriptionProject
+       ]);
+        
+        return redirect(route('spaceProject.index'))->with("success", "Registro alterado com sucesso");
+
+    }
 
 }

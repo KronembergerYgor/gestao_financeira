@@ -10,11 +10,17 @@ class FormRegisterProject extends Component
 {
     public $route;
     public $method;
+    public $nameButton;
+    public $registro;
+    public $idRoute;
 
-    public function __construct($route, $method)
+    public function __construct($route, $method, $nameButton = "Salvar", $registro = null, $idRoute = null)
     {
         $this->route        = $route;
         $this->method       = $method;
+        $this->nameButton   = $nameButton;
+        $this->registro     = $registro;
+        $this->$idRoute     = $idRoute;
 
     }
 

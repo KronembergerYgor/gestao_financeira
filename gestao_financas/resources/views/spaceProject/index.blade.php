@@ -29,8 +29,6 @@
                                     @if(strlen($project->description) > 40)
                                         <p class="card-text p-3 mb-0">{{Str::limit($project->description, 40)}} <a class='cursor-pointer' style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#modal_item_{{$project->id}}">Ver mais</a> </p>
 
-                                        
-
                                         <!-- Modal -->
                                         <div class="modal fade" id="modal_item_{{$project->id}}" tabindex="-1" aria-labelledby="modal_item_{{$project->id}}" aria-hidden="true">
                                             <div class="modal-dialog">
@@ -62,14 +60,26 @@
                                 <a href="#" class="btn btn-primary">Acessar Projeto</a>
 
                                 <div>
-                                    <a href="#" type="button" class="btn btn-danger">
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal_delete_register_project_{{$project->id}}">
                                         <i class="bi bi-trash"></i>
-                                    </a>
+                                    </button>
+
+                                    <x-modal-confirmation
+                                        id="modal_delete_register_project_{{$project->id}}"
+                                        textDescription="Deseja confirmar com a exclusão do projeto <b>{{$project->name}}</b>?"
+                                        actionRoute="spaceProject.registerProject.destroy"
+                                        method="POST"
+                                        buttonClose="Cancelar"
+                                        buttonAccept="Confirmar"
+                                        idRoute="{{$project->id}}"
+                                    />
+
                 
-                                    <a href="#" type="button" class="btn btn-success">
+                                    <a href="{{route('spaceProject.registerProject.edit', $project->id)}}" type="button" class="btn btn-success">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
                                 </div>
+
                             </div>
                         
                         </div>
