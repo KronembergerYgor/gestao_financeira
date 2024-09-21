@@ -44,9 +44,19 @@
                         <td scope="col">{{$register->category_revenues_and_expenses_name}}</td>
                         <td scope="col">{{$register->created_at}}</td>
                         <td scope="col">{{$register->updated_at}}</td>
-                        <td><button class="btn btn-success btn-sm"><i class="bi bi-pencil-square"></i></button></td>
-                        <td><button class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button></td>
+                        <td><button  type="button" data-bs-toggle="modal" data-bs-target="#modal_delete_register_{{$register->id}}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> </button></td>
+                        <td><a href='#' type='button' class="btn btn-success btn-sm"><i class="bi bi-pencil-square"></i></a></td>
 
+
+                        <x-modal-confirmation
+                            id="modal_delete_register_{{$register->id}}"
+                            textDescription="Deseja confirmar com a exclusão da <b>{{ $register->type }}</b> com nome <b>{{ $register->name }}</b>?"
+                            actionRoute="revenuesAndExpenses.destroy"
+                            method="DELETE"
+                            buttonClose="Cancelar"
+                            buttonAccept="Confirmar"
+                            idRoute="{{ $register->id }}"
+                        />
 
                     </tr>
 
@@ -63,6 +73,7 @@
           
     
         </tbody>
+        {{ $registers->links('pagination::bootstrap-4') }}
 </div>
 
 

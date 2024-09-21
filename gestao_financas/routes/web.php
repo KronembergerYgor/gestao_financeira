@@ -51,6 +51,7 @@ Route::middleware([checkAuth::class])->group(function () { //Autenticação de L
             Route::match(['get', 'post'], '/{id}', [RevenuesAndExpensesController::class, 'index'])->name('revenuesAndExpenses.index');
             Route::get('/Create/{id}', [RevenuesAndExpensesController::class, 'create'])->name('revenuesAndExpenses.create');
             Route::post('/Save/{id}', [RevenuesAndExpensesController::class, 'save'])->name('revenuesAndExpenses.save');
+            Route::delete('/Destroy/{id}', [RevenuesAndExpensesController::class, 'destroy'])->name('revenuesAndExpenses.destroy');
             
 
         });

@@ -83,4 +83,11 @@ class RevenuesAndExpensesController extends Controller
         return redirect(route('revenuesAndExpenses.index', $spaceProjectId))->with("spaceProjectId", $spaceProjectId);
         
     }
+
+    public function destroy($id){
+        $registro = RevenuesAndExpenses::findOrFail($id); // Localiza o registro pelo ID
+        $registro->delete(); // Deleta o registro
+
+        return redirect()->back()->with('success', 'Registro deletado com sucesso!');
+    }
 }
