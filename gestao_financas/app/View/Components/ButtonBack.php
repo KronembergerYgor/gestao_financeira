@@ -9,10 +9,12 @@ use Illuminate\View\Component;
 class ButtonBack extends Component
 {
     public $route;
+    public $idRoute;
 
-    public function __construct($route)
+    public function __construct($route, $idRoute = null)
     {
         $this->route        = $route;
+        $this->idRoute      = $idRoute;
 
     }
 

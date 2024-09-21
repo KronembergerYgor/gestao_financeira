@@ -22,7 +22,10 @@ class RevenuesAndExpenses extends Model
         'name',
         'description',
         'type',
-        'value'
+        'value',
+        'space_project_id',
+        'category_id'
+
     ];
 
     public function spaceProjectId()

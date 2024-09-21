@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('space_projects', function (Blueprint $table) {
             $table->unsignedBigInteger('responsible_user');
             $table->foreign('responsible_user')->references('id')->on('users');
-            $table->unsignedBigInteger('recipe_status_id');
+            $table->unsignedBigInteger('recipe_status_id')->nullable();
             $table->foreign('recipe_status_id')->references('id')->on('recipe_status');
         });
     }

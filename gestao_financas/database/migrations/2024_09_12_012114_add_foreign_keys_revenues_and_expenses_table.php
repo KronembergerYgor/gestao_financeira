@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('revenues_and_expenses', function (Blueprint $table) {
             $table->unsignedBigInteger('space_project_id');
             $table->foreign('space_project_id')->references('id')->on('space_projects');
-            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('category_revenues_and_expenses');
         });
     }

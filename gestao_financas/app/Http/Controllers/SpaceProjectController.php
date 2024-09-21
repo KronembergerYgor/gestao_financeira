@@ -29,13 +29,12 @@ class SpaceProjectController extends Controller
         SpaceProject::create([
             'name' => $request->nameProject,
             'description' => $request->descriptionProject,
-            'responsible_user' => Auth::user()->id,
-            'recipe_status_id' => 1
+            'responsible_user' => Auth::user()->id
         ]);
 
         
 
-        return redirect(route('spaceProject.index'))->with('projects', self::filterProjects());
+        return redirect(route('spaceProject.index'))->with('projects', self::filterProjects($request));
     }
 
     public function filterProjects(Request $request){

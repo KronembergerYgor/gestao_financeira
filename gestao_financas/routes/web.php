@@ -3,8 +3,10 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RevenuesAndExpensesController;
 use App\Http\Controllers\SpaceProjectController;
 use App\Http\Middleware\checkAuth;
+use App\Models\RevenuesAndExpenses;
 use App\Models\SpaceProject;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +33,7 @@ Route::middleware([checkAuth::class])->group(function () { //Autenticação de L
     });
 
     Route::prefix('SpaceProject')->group(function () {
+
         Route::match(['get', 'post'], '/', [SpaceProjectController::class, 'index'])->name('spaceProject.index');
         Route::prefix('RegisterProject')->group(function () {
             
@@ -41,6 +44,19 @@ Route::middleware([checkAuth::class])->group(function () { //Autenticação de L
             Route::put('/update/{id}', [SpaceProjectController::class, 'update'])->name('spaceProject.registerProject.update');
 
         });
+
+
+        Route::prefix('revenuesAndExpenses')->group(function () {
+
+            Route::match(['get', 'post'], '/{id}', [RevenuesAndExpensesController::class, 'index'])->name('revenuesAndExpenses.index');
+            Route::get('/Create/{id}', [RevenuesAndExpensesController::class, 'create'])->name('revenuesAndExpenses.create');
+            Route::post('/Save/{id}', [RevenuesAndExpensesController::class, 'save'])->name('revenuesAndExpenses.save');
+            
+
+        });
+
+
+
     });
 
 });

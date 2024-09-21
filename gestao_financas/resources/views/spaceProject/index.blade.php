@@ -28,9 +28,9 @@
                         <div class="card-body p-0">
                             @if(!empty($project->description))
 
-                                @if(strlen($project->description) > 40)
+                                @if(strlen($project->description) > 35)
                                     <p class="card-text p-3 mb-0 text-center">
-                                        {{ Str::limit($project->description, 40) }}
+                                        {{ Str::limit($project->description, 35) }}
                                         <a class='cursor-pointer' style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#modal_item_{{$project->id}}">
                                             Ver mais
                                         </a> 
@@ -47,7 +47,7 @@
                             @endif
 
                             <div class="card-footer text-body-secondary d-flex justify-content-between">
-                                <a href="#" class="btn btn-primary">Acessar Projeto</a>
+                                <a href="{{route('revenuesAndExpenses.index', $project->id)}}" class="btn btn-primary">Acessar Projeto</a>
                                 <div>
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal_delete_register_project_{{$project->id}}">
                                         <i class="bi bi-trash"></i>
