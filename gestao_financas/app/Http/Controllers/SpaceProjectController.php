@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Auth;
 
 class SpaceProjectController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {   
-        return view('spaceProject.index', ['projects' => self::filterProjects()]); // Retorna a view de cadastro
+        return view('spaceProject.index', ['projects' => self::filterProjects($request)]); // Retorna a view de cadastro
     }
 
     public function registerProject(){
@@ -38,8 +38,19 @@ class SpaceProjectController extends Controller
         return redirect(route('spaceProject.index'))->with('projects', self::filterProjects());
     }
 
-    public function filterProjects(){
-       return SpaceProject::where('responsible_user', Auth::user()->id)->get();
+    public function filterProjects(Request $request){
+
+        $projects = SpaceProject::where('responsible_user', Auth::user()->id);
+
+        if(isset($request->descriptionFilter)){ //Filtro por descrição
+            $projects = $projects->where("description", 'like', '%' . $request->descriptionFilter . '%');
+        }
+        if(isset($request->projectFilter)){//Filtro por nome
+            $projects = $projects->where("name", 'like', '%' . $request->projectFilter . '%');
+
+        }
+
+       return $projects->paginate(6); //Retornando consulta com paginação por 6 itens
     }
 
     public function destroy($id){

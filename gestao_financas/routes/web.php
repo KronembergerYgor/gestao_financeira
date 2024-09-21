@@ -31,7 +31,7 @@ Route::middleware([checkAuth::class])->group(function () { //Autenticação de L
     });
 
     Route::prefix('SpaceProject')->group(function () {
-        Route::get('/', [SpaceProjectController::class, 'index'])->name('spaceProject.index');
+        Route::match(['get', 'post'], '/', [SpaceProjectController::class, 'index'])->name('spaceProject.index');
         Route::prefix('RegisterProject')->group(function () {
             
             Route::get('/', [SpaceProjectController::class, 'registerProject'])->name('spaceProject.registerProject');
@@ -39,7 +39,6 @@ Route::middleware([checkAuth::class])->group(function () { //Autenticação de L
             Route::delete('/Destroy/{id}', [SpaceProjectController::class, 'destroy'])->name('spaceProject.registerProject.destroy');
             Route::get('/Edit/{id}', [SpaceProjectController::class, 'edit'])->name('spaceProject.registerProject.edit');
             Route::put('/update/{id}', [SpaceProjectController::class, 'update'])->name('spaceProject.registerProject.update');
-
 
         });
     });
