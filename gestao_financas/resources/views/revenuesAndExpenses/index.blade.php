@@ -26,6 +26,7 @@
                 <th scope="col">Categoria</th>
                 <th scope="col">criado</th>
                 <th scope="col">ultima atualização</th>
+                <th colspan='2' class='text-center'>Ação</th>
               </tr>
         </thead>
         <tbody>
@@ -43,6 +44,8 @@
                         <td scope="col">{{$register->category_revenues_and_expenses_name}}</td>
                         <td scope="col">{{$register->created_at}}</td>
                         <td scope="col">{{$register->updated_at}}</td>
+                        <td><button class="btn btn-success btn-sm"><i class="bi bi-pencil-square"></i></button></td>
+                        <td><button class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button></td>
 
 
                     </tr>
