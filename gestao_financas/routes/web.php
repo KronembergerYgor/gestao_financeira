@@ -52,6 +52,8 @@ Route::middleware([checkAuth::class])->group(function () { //Autenticação de L
             Route::get('/Create/{id}', [RevenuesAndExpensesController::class, 'create'])->name('revenuesAndExpenses.create');
             Route::post('/Save/{id}', [RevenuesAndExpensesController::class, 'save'])->name('revenuesAndExpenses.save');
             Route::delete('/Destroy/{id}', [RevenuesAndExpensesController::class, 'destroy'])->name('revenuesAndExpenses.destroy');
+            Route::get('/Edit/{id}', [RevenuesAndExpensesController::class, 'edit'])->name('revenuesAndExpenses.edit');
+            Route::put('/Update/{id}', [RevenuesAndExpensesController::class, 'update'])->name('revenuesAndExpenses.update');
             
 
         });

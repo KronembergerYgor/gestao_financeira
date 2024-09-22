@@ -13,14 +13,16 @@ class FormRegisterRevenuesAndExpenses extends Component
     public $spaceProjectId;
     public $types;
     public $categorys;
+    public $register;
 
-    public function __construct($route, $method, $spaceProjectId, $types, $categorys)
+    public function __construct($route, $method, $spaceProjectId, $types, $categorys, $register = null)
     {
         $this->route            = $route;
         $this->method           = $method;
         $this->spaceProjectId   = $spaceProjectId;
         $this->types             = $types;
         $this->categorys         = $categorys;
+        $this->register         = $register;
 
     }
     /**

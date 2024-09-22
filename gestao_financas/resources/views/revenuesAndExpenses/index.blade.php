@@ -30,7 +30,7 @@
               </tr>
         </thead>
         <tbody>
-            {{-- {{dd($registers)}} --}}
+
             @if(count($registers) > 0)
                 @foreach($registers as $register)
                     <tr>
@@ -45,7 +45,7 @@
                         <td scope="col">{{$register->created_at}}</td>
                         <td scope="col">{{$register->updated_at}}</td>
                         <td><button  type="button" data-bs-toggle="modal" data-bs-target="#modal_delete_register_{{$register->id}}" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> </button></td>
-                        <td><a href='#' type='button' class="btn btn-success btn-sm"><i class="bi bi-pencil-square"></i></a></td>
+                        <td><a href='{{route('revenuesAndExpenses.edit', $register->id )}}' type='button' class="btn btn-success btn-sm"><i class="bi bi-pencil-square"></i></a></td>
 
 
                         <x-modal-confirmation

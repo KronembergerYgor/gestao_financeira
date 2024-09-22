@@ -90,4 +90,46 @@ class RevenuesAndExpensesController extends Controller
 
         return redirect()->back()->with('success', 'Registro deletado com sucesso!');
     }
+
+    public function edit($id){
+
+        $register = RevenuesAndExpenses::where('id', $id)->first();
+
+        $types = [
+            "Receita",
+            "Despesa"
+        ];
+        
+        $categorys = CategoryRevenuesAndExpenses::select("*")->get();
+
+        return view('revenuesAndExpenses.edit', ['register' => $register, 'categorys' => $categorys, 'types' => $types, ]);
+    }
+
+    public function update(Request $request, $id){
+
+        $request->validate([ //Valida os campos do formulário de cadastro
+            'name'           => 'required',
+            'type'           => 'required',
+            'value'          => 'required',
+        ], [
+            'name.required' => 'O nome deve ser obrigatório.',
+            'type.required' => 'O tipo deve ser obrigatório.',
+            'value.required' => 'O valor deve ser obrigatório.'
+        ]);
+        
+
+        RevenuesAndExpenses::where('id', $id)
+        ->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'type' => $request->type,
+            'value' => str_contains($request->value, ",") ? str_replace($request->value, ",", ".") : $request->value,
+            'category_id' => $request->category
+       ]); 
+
+       $register = RevenuesAndExpenses::select('space_project_id')->where('id', $id)->first();
+
+        return redirect(route('revenuesAndExpenses.index', $register->space_project_id))->with("success", "Registro alterado com sucesso");
+
+    }
 }
