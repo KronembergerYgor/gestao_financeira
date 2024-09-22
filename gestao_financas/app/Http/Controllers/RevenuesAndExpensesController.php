@@ -11,15 +11,29 @@ class RevenuesAndExpensesController extends Controller
     public function index(Request $request, $spaceProjectId)
     {   
 
+        $categorys = CategoryRevenuesAndExpenses::select("*")->get();
+        $types = [
+            "Receita",
+            "Despesa"
+        ];
+
         // dd(self::filterRevenuesAndExpenses($request, $spaceProjectId));
         return view('revenuesAndExpenses.index', [
             'registers' => self::filterRevenuesAndExpenses($request, $spaceProjectId),
-            'spaceProjectId' => $spaceProjectId
+            'spaceProjectId' => $spaceProjectId,
+            'types' => $types,
+            'categorys' => $categorys
     
     ]); // Retorna a view de cadastro
     }
 
     public function filterRevenuesAndExpenses(Request $request, $spaceProjectId){
+
+
+        // dd($request->all());
+
+
+
 
         $projects = RevenuesAndExpenses::select(
                 'revenues_and_expenses.id',
@@ -37,6 +51,40 @@ class RevenuesAndExpensesController extends Controller
         ->join('space_projects', 'space_projects.id', '=', 'revenues_and_expenses.space_project_id')
         ->join('category_revenues_and_expenses', 'category_revenues_and_expenses.id', '=', 'revenues_and_expenses.category_id')
         ->where('space_project_id', $spaceProjectId);
+
+
+        if(isset($request->idItemFilter)){
+            $projects = $projects->where('revenues_and_expenses.id', $request->idItemFilter);
+        }
+
+        // if(isset($request->ProjectNameFilter)){
+        //     $projects = $projects->where('space_projects.name', 'like', "%" . $request->ProjectNameFilter . "%");
+        // }
+
+        if(isset($request->nameFilter)){
+            $projects = $projects->where('revenues_and_expenses.name', 'like', "%" . $request->nameFilter . "%");
+        }
+
+
+        if(isset($request->typeFilter)){
+            $projects = $projects->where('revenues_and_expenses.type', 'like', "%" . $request->typeFilter . "%");
+        }
+
+
+        if(isset($request->categoryFilter)){
+            $projects = $projects->where('revenues_and_expenses.category_id', $request->categoryFilter);
+        }
+
+
+        if(isset($request->valueFilter)){
+            $projects = $projects->where('revenues_and_expenses.value', $request->valueFilter);
+        }
+
+        if(isset($request->descriptionFilter)){
+            $projects = $projects->where('revenues_and_expenses.description', 'like', "%" . $request->descriptionFilter . "%");
+        }
+
+
 
        return $projects->paginate(10); //Retornando consulta com paginação por 6 itens
     } 

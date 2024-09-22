@@ -10,9 +10,13 @@
 
     <h1>Receitas e Despesas</h1>
     <hr>
+    <x-filter-revenues-and-expenses route="revenuesAndExpenses.index" idRoute={{$spaceProjectId}} :types="$types" :categorys="$categorys"/>
+    <hr>
     <x-button-back route='spaceProject.index'></x-button-back> <!-- Componente de botão para voltar -->
     <a type="button" class='btn btn-primary' href="{{route('revenuesAndExpenses.create', $spaceProjectId)}}">Cadastrar</a>
     <hr>
+
+ 
 
     <table class="table table-striped">
         <thead>

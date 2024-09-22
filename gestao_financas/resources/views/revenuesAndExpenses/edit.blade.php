@@ -8,8 +8,6 @@
 
 
 <div class="container d-flex align-items-center justify-content-center min-vh-100">
-    
-    {{-- {{dd($registers)}} --}}
 
     <div class='boxLogin border rounded shadow-lg p-5 w-75 m-5'>    
         <x-button-back route='revenuesAndExpenses.index' idRoute='{{$register->space_project_id}}'></x-button-back> <!-- Componente de botão para voltar -->

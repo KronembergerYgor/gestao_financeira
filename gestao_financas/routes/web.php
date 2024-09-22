@@ -55,9 +55,14 @@ Route::middleware([checkAuth::class])->group(function () { //Autenticação de L
             Route::get('/Edit/{id}', [RevenuesAndExpensesController::class, 'edit'])->name('revenuesAndExpenses.edit');
             Route::put('/Update/{id}', [RevenuesAndExpensesController::class, 'update'])->name('revenuesAndExpenses.update');
             
-
         });
 
+
+
+    });
+
+    Route::prefix('Category')->group(function () {
+        Route::get('/', [RevenuesAndExpensesController::class, 'index'])->name('category.index');
 
 
     });
