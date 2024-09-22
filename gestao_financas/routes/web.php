@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
@@ -62,7 +63,12 @@ Route::middleware([checkAuth::class])->group(function () { //Autenticação de L
     });
 
     Route::prefix('Category')->group(function () {
-        Route::get('/', [RevenuesAndExpensesController::class, 'index'])->name('category.index');
+        Route::get('/', [CategoryController::class, 'index'])->name('category.index');
+        Route::get('/Create', [CategoryController::class, 'create'])->name('category.create');
+        Route::post('/Save', [CategoryController::class, 'save'])->name('category.save');
+        Route::delete('/Destroy/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
+        Route::get('/Edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+        Route::put('/Update/{id}', [CategoryController::class, 'update'])->name('category.update');
 
 
     });

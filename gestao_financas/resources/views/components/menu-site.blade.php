@@ -12,7 +12,8 @@
         <hr>
         <li><a href="{{route('home.index')}}">Início</a></li>
         <li><a href="{{route('spaceProject.index')}}">Projetos</a></li>
-        <li><a href="{{route('category.index')}}">Cadastrar Categoria</a></li>
+        <li><a href="{{route('category.index')}}">Categorias</a></li>
+        <li><a href="#">Status</a></li>
         <hr>
         <li>
             <form action="{{ route('logout') }}" method="POST">

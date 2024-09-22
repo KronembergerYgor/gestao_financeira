@@ -54,6 +54,7 @@ class SpaceProjectController extends Controller
 
     public function destroy($id){
         $registro = SpaceProject::findOrFail($id); // Localiza o registro pelo ID
+        // $registro->posts()->delete();
         $registro->delete(); // Deleta o registro
 
         return redirect()->back()->with('success', 'Registro deletado com sucesso!');

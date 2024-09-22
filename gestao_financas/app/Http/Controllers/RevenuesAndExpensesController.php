@@ -128,6 +128,7 @@ class RevenuesAndExpensesController extends Controller
 
     public function destroy($id){
         $registro = RevenuesAndExpenses::findOrFail($id); // Localiza o registro pelo ID
+        // $registro->posts()->delete();
         $registro->delete(); // Deleta o registro
 
         return redirect()->back()->with('success', 'Registro deletado com sucesso!');
