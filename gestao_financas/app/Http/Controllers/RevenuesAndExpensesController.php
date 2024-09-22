@@ -24,16 +24,10 @@ class RevenuesAndExpensesController extends Controller
             'types' => $types,
             'categorys' => $categorys
     
-    ]); // Retorna a view de cadastro
+        ]); // Retorna a view de cadastro
     }
 
     public function filterRevenuesAndExpenses(Request $request, $spaceProjectId){
-
-
-        // dd($request->all());
-
-
-
 
         $projects = RevenuesAndExpenses::select(
                 'revenues_and_expenses.id',
