@@ -9,6 +9,8 @@
 <div class="content p-5" id="content">
     <h1>Categorias</h1>
     <hr>
+    <x-filter-category route='category.index' />
+    <hr>
 
     {{-- <x-button-back route='spaceProject.index'></x-button-back> <!-- Componente de botão para voltar --> --}}
     <a type="button" class='btn btn-primary' href="{{route('category.create')}}">Cadastrar</a>

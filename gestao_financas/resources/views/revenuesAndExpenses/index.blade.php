@@ -43,7 +43,7 @@
                         <td scope="col">{{$register->name}}</td>
                         <td scope="col">{{$register->description}}</td>
                         <td scope="col">{{$register->type}}</td>
-                        <td scope="col">{{$register->value}}</td>
+                        <td scope="col">R$ {{$register->value}}</td>
                         <td scope="col">{{$register->space_project_name}}</td>
                         <td scope="col">{{$register->category_revenues_and_expenses_name}}</td>
                         <td scope="col">{{$register->created_at}}</td>

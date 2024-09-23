@@ -10,15 +10,31 @@ class CategoryController extends Controller
     public function index(Request $request)
     {   
         return view('category.index', [
-            "categorys" => self::filterCategorys()
+            "categorys" => self::filterCategorys($request)
 
         ]); // Retorna a view de cadastro
     }
 
-    public function filterCategorys()
+    public function filterCategorys(Request $request)
     {   
-        $categorys = CategoryRevenuesAndExpenses::select("*")->get();
-        return $categorys;
+
+        // dd($request->all());
+        $categorys = CategoryRevenuesAndExpenses::select("*");
+
+        if(isset($request->nameCategoryFilter)){
+            $categorys = $categorys->where("name", "like", "%" . $request->nameCategoryFilter . "%");
+        }
+
+        if(isset($request->descriptionCategoryFilter)){
+            $categorys = $categorys->where("name", "like", "%" . $request->descriptionCategoryFilter . "%");
+        }
+
+        if(isset($request->idCategoryFilter)){
+            $categorys = $categorys->where("id", $request->idCategoryFilter);
+        }
+
+
+        return $categorys->paginate(10);
     }
 
     public function create()
@@ -43,7 +59,7 @@ class CategoryController extends Controller
         ]);
         
 
-        return redirect(route('category.index'))->with("categorys", self::filterCategorys());
+        return redirect(route('category.index'))->with("categorys", self::filterCategorys($request));
         
     }
 

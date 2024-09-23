@@ -6,6 +6,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RevenuesAndExpensesController;
 use App\Http\Controllers\SpaceProjectController;
+use App\Http\Controllers\StatusController;
 use App\Http\Middleware\checkAuth;
 use App\Models\RevenuesAndExpenses;
 use App\Models\SpaceProject;
@@ -63,12 +64,24 @@ Route::middleware([checkAuth::class])->group(function () { //Autenticação de L
     });
 
     Route::prefix('Category')->group(function () {
-        Route::get('/', [CategoryController::class, 'index'])->name('category.index');
+        Route::match(['get', 'post'], '/', [CategoryController::class, 'index'])->name('category.index');
         Route::get('/Create', [CategoryController::class, 'create'])->name('category.create');
         Route::post('/Save', [CategoryController::class, 'save'])->name('category.save');
         Route::delete('/Destroy/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
         Route::get('/Edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
         Route::put('/Update/{id}', [CategoryController::class, 'update'])->name('category.update');
+
+
+    });
+
+    Route::prefix('Status')->group(function () {
+        Route::match(['get', 'post'], '/', [StatusController::class, 'index'])->name('status.index');
+        Route::get('/Create', [StatusController::class, 'create'])->name('status.create');
+        Route::post('/Save', [StatusController::class, 'save'])->name('status.save');
+        Route::delete('/Destroy/{id}', [StatusController::class, 'destroy'])->name('status.destroy');
+        Route::get('/Edit/{id}', [StatusController::class, 'edit'])->name('status.edit');
+        Route::put('/Update/{id}', [StatusController::class, 'update'])->name('status.update');
+
 
 
     });
