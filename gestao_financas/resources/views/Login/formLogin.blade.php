@@ -20,7 +20,7 @@
 
     <div class='boxPassword row'> 
         <div class="rememberPassword col d-flex justify-content-center">
-            <a href="#">Esqueceu a senha?</a> <!-- Esquecimento de senha -->
+            <a href="{{route('password.request')}}">Esqueceu a senha?</a> <!-- Esquecimento de senha -->
         </div>
         <div class='col'>
             <a type="button" class="btn btn-secondary" href='{{route('RegisterUser.index')}}'>Cadastre-se</a> <!-- Área para cadastro -->

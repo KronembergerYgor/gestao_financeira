@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
@@ -24,6 +26,28 @@ Route::prefix('Register')->group(function () {
     Route::get('/', [RegisterController::class, 'index'])->name('RegisterUser.index');
     Route::post('/Save', [RegisterController::class, 'save'])->name('RegisterUser.save');
 });
+
+
+Route::prefix('Password')->group(function () {
+    // Exibe o formulário de "esqueci a senha"
+    Route::get('/forgot', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+    // Processa o envio do e-mail de recuperação
+    Route::post('/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+
+    Route::prefix('reset')->group(function () {
+        // Exibe o formulário de redefinição de senha
+        Route::get('/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+
+        // Processa a redefinição da senha
+        Route::post('/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+
+    });
+
+
+});
+
+
 
 Route::middleware([checkAuth::class])->group(function () { //Autenticação de Login
 
