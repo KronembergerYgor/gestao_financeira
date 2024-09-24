@@ -46,27 +46,50 @@
                                 <p class="card-text p-3 mb-0 text-center">Nenhuma descrição cadastrada</p>
                             @endif
 
-                            <div class="card-footer text-body-secondary d-flex justify-content-between">
-                                <a href="{{route('revenuesAndExpenses.index', $project->id)}}" class="btn btn-primary">Acessar Projeto</a>
-                                <div>
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal_delete_register_project_{{$project->id}}">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
+                            <div class='row'>
+                                <p class='col card-text p-3 mb-0 text-center'><i class="text-success bi bi-plus-circle"></i> Total da receita R$ {{ $project->receita_geral }}</p>
+                                <p class='col card-text p-3 mb-0 text-center'><i class="text-danger bi bi-dash-circle"></i> Total da Despesa R$ {{ $project->despesa_geral }}</p>
+                            </div>
 
-                                    <x-modal-confirmation
-                                        id="modal_delete_register_project_{{$project->id}}"
-                                        textDescription="Deseja confirmar com a exclusão do projeto <b>{{ $project->name }}</b>?"
-                                        actionRoute="spaceProject.registerProject.destroy"
-                                        method="POST"
-                                        buttonClose="Cancelar"
-                                        buttonAccept="Confirmar"
-                                        idRoute="{{ $project->id }}"
-                                    />
+                            <div class='row'>
+                                <p class='col card-text p-3 mb-0 text-center'>
+                                    @if($project->porcentagem <= 0)
+                                    <i class="text-danger bi bi-x-circle"></i>
 
-                                    <a href="{{ route('spaceProject.registerProject.edit', $project->id) }}" type="button" class="btn btn-success">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </a>
-                                </div>
+                                    @elseif($project->porcentagem <= 20 && $project->porcentagem > 0)
+                                     <i class="text-warning bi bi-exclamation-circle"></i>
+
+                                    @else
+                                        <i class="text-success bi bi-check-circle"></i>
+                                    @endif
+                                
+                                Total do saldo R$ {{ $project->saldo }}</p>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="card-footer text-body-secondary d-flex justify-content-between">
+                            <a href="{{route('revenuesAndExpenses.index', $project->id)}}" class="btn btn-primary">Acessar Projeto</a>
+                            <div>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal_delete_register_project_{{$project->id}}">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+
+                                <x-modal-confirmation
+                                    id="modal_delete_register_project_{{$project->id}}"
+                                    textDescription="Deseja confirmar com a exclusão do projeto <b>{{ $project->name }}</b>?"
+                                    actionRoute="spaceProject.registerProject.destroy"
+                                    method="POST"
+                                    buttonClose="Cancelar"
+                                    buttonAccept="Confirmar"
+                                    idRoute="{{ $project->id }}"
+                                />
+
+                                <a href="{{ route('spaceProject.registerProject.edit', $project->id) }}" type="button" class="btn btn-success">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
