@@ -23,7 +23,7 @@ class ResetPasswordController extends Controller
         // Valida os dados fornecidos
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required|confirmed|min:8',
+            'password' => 'required|confirmed',
             'token' => 'required'
         ]);
 

@@ -53,15 +53,23 @@
 
                             <div class='row'>
                                 <p class='col card-text p-3 mb-0 text-center'>
-                                    @if($project->porcentagem <= 0)
-                                    <i class="text-danger bi bi-x-circle"></i>
-
-                                    @elseif($project->porcentagem <= 20 && $project->porcentagem > 0)
-                                     <i class="text-warning bi bi-exclamation-circle"></i>
-
+                                    @if($project->receita_geral == 0 && $project->despesa_gera == 0)
+                                        <i class="text-secondary bi bi-0-circle"></i>
                                     @else
-                                        <i class="text-success bi bi-check-circle"></i>
+
+                                        @if($project->porcentagem <= 0)
+                                            <i class="text-danger bi bi-x-circle"></i>
+                                        @elseif($project->porcentagem <= 20 && $project->porcentagem > 0)
+                                            <i class="text-warning bi bi-exclamation-circle"></i>
+                                        @else
+                                            <i class="text-success bi bi-check-circle"></i>
+                                        @endif
+
                                     @endif
+
+
+
+                              
                                 
                                 Total do saldo R$ {{ $project->saldo }}</p>
 
