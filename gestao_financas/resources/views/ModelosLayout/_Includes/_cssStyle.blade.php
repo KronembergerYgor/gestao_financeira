@@ -143,6 +143,15 @@
     margin-left: 100px;
 }
 
+
+/*--------- Perfil ------- */
+
+#userPhoto{
+    width: 150px; 
+    height: 150px; 
+    object-fit: cover;
+}
+
   
 
 

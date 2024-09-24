@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RevenuesAndExpensesController;
 use App\Http\Controllers\SpaceProjectController;
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\checkAuth;
 use App\Models\RevenuesAndExpenses;
 use App\Models\SpaceProject;
@@ -47,20 +48,14 @@ Route::middleware([checkAuth::class])->group(function () { //Autenticação de L
 
         });
 
-
         Route::prefix('revenuesAndExpenses')->group(function () {
-
             Route::match(['get', 'post'], '/{id}', [RevenuesAndExpensesController::class, 'index'])->name('revenuesAndExpenses.index');
             Route::get('/Create/{id}', [RevenuesAndExpensesController::class, 'create'])->name('revenuesAndExpenses.create');
             Route::post('/Save/{id}', [RevenuesAndExpensesController::class, 'save'])->name('revenuesAndExpenses.save');
             Route::delete('/Destroy/{id}', [RevenuesAndExpensesController::class, 'destroy'])->name('revenuesAndExpenses.destroy');
             Route::get('/Edit/{id}', [RevenuesAndExpensesController::class, 'edit'])->name('revenuesAndExpenses.edit');
             Route::put('/Update/{id}', [RevenuesAndExpensesController::class, 'update'])->name('revenuesAndExpenses.update');
-            
         });
-
-
-
     });
 
     Route::prefix('Category')->group(function () {
@@ -70,8 +65,6 @@ Route::middleware([checkAuth::class])->group(function () { //Autenticação de L
         Route::delete('/Destroy/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
         Route::get('/Edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
         Route::put('/Update/{id}', [CategoryController::class, 'update'])->name('category.update');
-
-
     });
 
     Route::prefix('Status')->group(function () {
@@ -81,9 +74,11 @@ Route::middleware([checkAuth::class])->group(function () { //Autenticação de L
         Route::delete('/Destroy/{id}', [StatusController::class, 'destroy'])->name('status.destroy');
         Route::get('/Edit/{id}', [StatusController::class, 'edit'])->name('status.edit');
         Route::put('/Update/{id}', [StatusController::class, 'update'])->name('status.update');
-
-
-
+    });
+    
+    Route::prefix('Perfil')->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('perfil.index');
+        Route::put('/update', [UserController::class, 'update'])->name('perfil.update');
     });
 
 });

@@ -1,7 +1,8 @@
 <div class="sidebar" id="sidebar">
     <div class='row'>
-        <div class='col-10'>
-            <h2>Olá, </h2>
+        <div class='col-10 text-end'>
+            <h2  class='m-0 text-end'>Olá, {{Auth::user()->name}}</h2>
+            <a href="{{route('perfil.index')}}">Acessar Perfil</a>
         </div>
         <div class='col-2'>
             <button class="toggle-btn"><i class="bi bi-list"></i></button>

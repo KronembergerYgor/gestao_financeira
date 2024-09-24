@@ -22,7 +22,8 @@ class RegisterController extends Controller
             'nameUser'  => 'required',
             'email'     => 'required|email|unique:users',
             'password'  => 'required',
-            'confirmPassword' => 'required|same:password'
+            'confirmPassword' => 'required|same:password',
+            'imageUser' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ], [
             'nameUser.required' => 'O nome deve ser obrigatório.',
             'email.required'    => 'O email deve ser obrigatório',
@@ -34,6 +35,8 @@ class RegisterController extends Controller
         ]);
 
         $dados['imageUser'] = self::validate_image_user($request); //Gera um nome para a imagem anexada
+
+
 
         // Criação do novo registro
         User::create([

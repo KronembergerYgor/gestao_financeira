@@ -12,12 +12,14 @@ class formRegister extends Component
     public $route;
     public $method;
     public $titleButton;
+    public $register;
 
-    public function __construct($route, $method, $titleButton)
+    public function __construct($route, $method, $titleButton = "Cadastre-se", $register = null)
     {
         $this->route        = $route;
         $this->method       = $method;
         $this->titleButton  = $titleButton;
+        $this->register     = $register;
 
     }
 
