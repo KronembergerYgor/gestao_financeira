@@ -66,10 +66,6 @@
                                         @endif
 
                                     @endif
-
-
-
-                              
                                 
                                 Total do saldo R$ {{ $project->saldo }}</p>
 

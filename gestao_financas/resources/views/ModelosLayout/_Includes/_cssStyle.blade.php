@@ -3,6 +3,7 @@
     body, html {
         width: 100%;
         height: 100%;
+        overflow-x: hidden; /* Esconde o scroll horizontal */
     }
 
     /* ------------ Estilo body ------------ */
@@ -134,7 +135,7 @@
 
 /* Ajustar o conteúdo para o lado da sidebar */
 .content {
-    margin-left: 300px; /* Alinhar ao lado da sidebar */
+    margin-left: 17rem; /* Alinhar ao lado da sidebar */
     transition: margin-left 0.3s ease;
 }
 
@@ -152,6 +153,26 @@
     object-fit: cover;
 }
 
+/* ----- Titulo ------ */
+
+.titlePage {
+    margin: 2rem 2rem;
+
+}
+
+.titlePage h1{
+    font-size: 3.7rem;
+}
+
+/* ----- Cards Home ---- */
+
+#boxCards {
+        padding: 1rem 0rem; /* Ajuste o padding conforme necessário */
+    }
+
+.cardContentText{
+    width: 25.5rem;
+}
   
 
 

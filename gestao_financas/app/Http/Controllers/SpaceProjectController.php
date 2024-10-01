@@ -64,7 +64,7 @@ class SpaceProjectController extends Controller
         ->selectRaw("(sum(if(revenues_and_expenses.type = 'Receita', revenues_and_expenses.value, 0)) - sum(if(revenues_and_expenses.type = 'Despesa', revenues_and_expenses.value, 0))) as saldo")    
         ->leftJoin('revenues_and_expenses', 'space_projects.id', '=', 'revenues_and_expenses.space_project_id')
         ->where('space_projects.responsible_user', Auth::user()->id)
-        ->groupBy('space_projects.id');;
+        ->groupBy('space_projects.id');
 
 
         if(isset($request->descriptionFilter)){ //Filtro por descrição

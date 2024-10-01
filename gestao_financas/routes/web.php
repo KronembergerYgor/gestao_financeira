@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\GraphicsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
@@ -57,6 +58,11 @@ Route::middleware([checkAuth::class])->group(function () { //Autenticação de L
     
     Route::prefix('home')->group(function () {
         Route::get('/', [HomeController::class, 'index'])->name('home.index');
+    });
+        
+    Route::prefix('graphics')->group(function () {
+        Route::get('/ExpenseForCategory', [GraphicsController::class, 'values_expenses_for_category'])->name('graphics.expenseForCategory');
+        Route::get('/RevenuesAndExpenses', [GraphicsController::class, 'values_revenues_and_expenses'])->name('graphics.revenuesAndExpenses');
     });
 
     Route::prefix('SpaceProject')->group(function () {
