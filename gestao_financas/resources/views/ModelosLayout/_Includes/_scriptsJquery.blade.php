@@ -53,13 +53,19 @@
             error: (err) => console.error('Erro ao buscar dados: ', err)
         });
     }
+    // Função para verificar e reparar retorno do response
+    function repairAndVerifyResponse(data) {
+        if(data.original){
+            data = data.original
+        }
+        return data;
+    }
 
     // Função para atualizar os cards
     function renderUpdateCards(response) {
 
-        if(response.original){
-            response = response.original
-        }
+        response = repairAndVerifyResponse(response);
+       
 
         $('#boxCards .card-body h4').eq(0).text('R$ ' + response.receita_geral);
         $('#boxCards .card-body h4').eq(1).text('R$ ' + response.despesa_geral);
@@ -77,9 +83,7 @@
             doughnutChart.destroy();
         }
 
-        if(response.original){
-            response = response.original
-        }
+        response = repairAndVerifyResponse(response);
 
         doughnutChart = new Chart(ctx, {
             type: 'doughnut',
@@ -92,10 +96,6 @@
         });
     }
 
-    // function renderExpenseBarChart(response) {
-    //     const ctx = document.getElementById('expenseCategory').getContext('2d');
-
-    // }
 
     // Renderiza gráfico de barras de despesas
     function renderExpenseBarChart(response) {
@@ -106,9 +106,7 @@
             expenseBarChart.destroy();
         }
 
-        if(response.original){
-            response = response.original
-        }
+        response = repairAndVerifyResponse(response);
 
         expenseBarChart = new Chart(ctx, {
             type: 'bar',
@@ -146,9 +144,7 @@
             revenueBarChart.destroy();
         }
 
-        if(response.original){
-            response = response.original
-        }
+        response = repairAndVerifyResponse(response);
 
         revenueBarChart = new Chart(ctx, {
             type: 'bar',
@@ -177,6 +173,7 @@
         });
     }
 
+    //Função para atualizar os gráficos e cards
     function updateCharts(selectedType) {
     $.ajax({
             url: "{{ route('graphics.updateCharts') }}",
@@ -188,8 +185,6 @@
                 renderDoughnutChart(response.doughnutData);
                 renderExpenseBarChart(response.expenseData);
                 renderRevenueBarChart(response.revenueData);
-
-        
                 renderUpdateCards(response.cardsValuesData);
             },
             error: (err) => console.error('Erro ao buscar dados: ', err)
