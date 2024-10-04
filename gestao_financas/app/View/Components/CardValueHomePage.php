@@ -9,13 +9,13 @@ use Illuminate\View\Component;
 class CardValueHomePage extends Component
 {
     public $title;
-    public $value;
+    // public $value;
     public $icon;
 
-    public function __construct($value, $title, $icon)
+    public function __construct( $title, $icon)
     {
         $this->title        = $title;
-        $this->value        = $value;
+        // $this->value        = $value;
         $this->icon         = $icon;
     }
 

@@ -3,6 +3,6 @@
       <h5>{!! $icon !!} {{$title}}</h5>
     </div>
     <div class="card-body text-center">
-    <h4>R$ {{$value}}</h4>
+    <h4></h4>
     </div>
 </div>

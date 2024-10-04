@@ -65,6 +65,7 @@ Route::middleware([checkAuth::class])->group(function () { //Autenticação de L
         Route::get('/ExpenseForCategory', [GraphicsController::class, 'values_expenses_for_category'])->name('graphics.expenseForCategory');
         Route::get('/RevenuesAndExpenses', [GraphicsController::class, 'values_revenues_and_expenses'])->name('graphics.revenuesAndExpenses');
         Route::get('/RevenuesForCategory', [GraphicsController::class, 'values_revenues_for_category'])->name('graphics.revenuesForCategory');
+        Route::get('/valuesCards', [GraphicsController::class, 'values_cards'])->name('graphics.valuesCards');
         Route::get('/update_charts', [GraphicsController::class, 'update_charts'])->name('graphics.updateCharts');
     });
 

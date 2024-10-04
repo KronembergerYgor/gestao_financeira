@@ -1,241 +1,199 @@
 <script>
-    // Usado para tempo do alert na tela 
-    $(document).ready(function() { 
-        setTimeout(function() {
-            $('#alert-message').fadeOut('slow');
-        }, 3000); // 3000 milissegundos = 3 segundos
-    });
-
     $(document).ready(function() {
+        // Ocultar alerta após 3 segundos
+        setTimeout(() => $('#alert-message').fadeOut('slow'), 3000);
+
+        // Alternar o sidebar
         $('.toggle-btn').click(function() {
             $('#sidebar').toggleClass('collapsed');
             $('#content').toggleClass('expanded');
         });
+
+        // Inicializa os gráficos
+        initializeCharts();
+
+        // Atualiza gráficos ao clicar no botão de filtro
+        $('#filterButton').on('click', function() {
+            const selectedType = $('#type').val();
+            updateCharts(selectedType);
+        });
+
+        // Expande/recolhe o card de filtro
+        $('#filterHeader').on('click', function() {
+            const $filterBody = $('#filterBody');
+            const isExpanded = $filterBody.css('max-height') !== '0px';
+
+            $filterBody.css({
+                'padding': isExpanded ? '0 1rem' : '1rem 1rem',
+                'max-height': isExpanded ? '0px' : '200px'
+            });
+        });
     });
 
+    // Variáveis globais para os gráficos
+    let doughnutChart;
+    let expenseBarChart;
+    let revenueBarChart;
+    let updateCards;
 
-
-
-
-
-    $(document).ready(function() {
-    // Função para inicializar os gráficos
+    // Função para inicializar gráficos
     function initializeCharts() {
-        $.ajax({
-            url: "{{ route('graphics.revenuesAndExpenses') }}", // A URL da sua API
-            method: 'GET',
-            success: function(response) {
-                const expensesAndRecives = document.getElementById('expensesAndRecives').getContext('2d');
-                const myDoughnutChart = new Chart(expensesAndRecives, {
-                    type: 'doughnut',
-                    data: {
-                        labels: response.labels, // Usando os labels da resposta
-                        datasets: response.datasets // Usando os datasets da resposta
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'bottom',
-                            }
-                        }
-                    }
-                });
-            },
-            error: function(err) {
-                console.error('Erro ao buscar dados: ', err);
-            }
-        });
+        fetchChartData("{{ route('graphics.revenuesAndExpenses') }}", renderDoughnutChart);
+        fetchChartData("{{ route('graphics.expenseForCategory') }}", renderExpenseBarChart);
+        fetchChartData("{{ route('graphics.revenuesForCategory') }}", renderRevenueBarChart);
+        fetchChartData("{{ route('graphics.valuesCards') }}", renderUpdateCards);
+    }
 
+    // Função para buscar dados da API
+    function fetchChartData(url, callback) {
         $.ajax({
-            url: "{{ route('graphics.expenseForCategory') }}", // A URL da sua API
+            url: url,
             method: 'GET',
-            success: function(response) {
-                const expenseCategory = document.getElementById('expenseCategory').getContext('2d');
-                const myBarChart = new Chart(expenseCategory, {
-                    type: 'bar',
-                    data: {
-                        labels: response.labels, // Usando os labels da resposta
-                        datasets: response.datasets // Usando os datasets da resposta
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                display: false,
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        return context.dataset.label + ': R$' + context.raw;
-                                    }
-                                }
-                            },
-                            datalabels: {
-                                anchor: 'center',
-                                align: 'center',
-                                color: '#000',
-                                font: {
-                                    size: 10
-                                },
-                                formatter: function(value, context) {
-                                    return context.dataset.label + '\nR$' + value;
-                                }
-                            }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    },
-                    plugins: [ChartDataLabels]
-                });
-            },
-            error: function(err) {
-                console.error('Erro ao buscar dados: ', err);
-            }
-        });
-
-        $.ajax({
-            url: "{{ route('graphics.revenuesForCategory') }}", // A URL da sua API
-            method: 'GET',
-            success: function(response) {
-                const revenuesCategory = document.getElementById('revenuesCategory').getContext('2d');
-                const myBarChart = new Chart(revenuesCategory, {
-                    type: 'bar',
-                    data: {
-                        labels: response.labels,
-                        datasets: response.datasets
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                display: false,
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        return context.dataset.label + ': R$' + context.raw;
-                                    }
-                                }
-                            },
-                            datalabels: {
-                                anchor: 'center',
-                                align: 'center',
-                                color: '#000',
-                                font: {
-                                    size: 10
-                                },
-                                formatter: function(value, context) {
-                                    return context.dataset.label + '\nR$' + value;
-                                }
-                            }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    },
-                    plugins: [ChartDataLabels]
-                });
-            },
-            error: function(err) {
-                console.error('Erro ao buscar dados: ', err);
-            }
+            success: callback,
+            error: (err) => console.error('Erro ao buscar dados: ', err)
         });
     }
 
-    // Inicializa os gráficos ao carregar a página
-    initializeCharts();
+    // Função para atualizar os cards
+    function renderUpdateCards(response) {
 
-    $('#filterButton').on('click', function() {
-        const selectedType = $('#type').val();
-        // Aqui, você vai fazer chamadas AJAX para atualizar os gráficos com base no filtro selecionado.
+        if(response.original){
+            response = response.original
+        }
 
-        // console.log(selectedType);
-        updateCharts(selectedType);
-    });
-
-    function updateCharts(selectedType) {
-
-        // console.log($selectedType);
-        $.ajax({
-            url: "{{ route('graphics.updateCharts') }}", // URL do seu endpoint de atualização
-            method: 'GET',
-            data: { type: selectedType }, // Envia o valor selecionado
-            success: function(response) {
-                // Atualiza os gráficos com os dados retornados
-                updateDoughnutChart(response.doughnutData);
-                updateBarChart(response.expenseData);
-                updateRevenuesChart(response.revenueData);
-            },
-            error: function(err) {
-                console.error('Erro ao buscar dados: ', err);
-            }
-        });
+        $('#boxCards .card-body h4').eq(0).text('R$ ' + response.receita_geral);
+        $('#boxCards .card-body h4').eq(1).text('R$ ' + response.despesa_geral);
+        $('#boxCards .card-body h4').eq(2).text('R$ ' + response.saldo);
     }
 
-    function updateDoughnutChart(data) {
-        const expensesAndRecives = document.getElementById('expensesAndRecives').getContext('2d');
-        // Atualiza o gráfico de donut
-        // Aqui você precisa implementar a lógica para atualizar o gráfico existente com os novos dados
-        // Por exemplo:
-        const myDoughnutChart = new Chart(expensesAndRecives, {
+
+    // Renderiza gráfico de donut
+    function renderDoughnutChart(response) {
+        const ctx = document.getElementById('expensesAndRecives').getContext('2d');
+       
+
+        // Destruir o gráfico anterior, se existir
+        if (doughnutChart) {
+            doughnutChart.destroy();
+        }
+
+        if(response.original){
+            response = response.original
+        }
+
+        doughnutChart = new Chart(ctx, {
             type: 'doughnut',
-            data: data,
+            data: response,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+    }
+
+    // function renderExpenseBarChart(response) {
+    //     const ctx = document.getElementById('expenseCategory').getContext('2d');
+
+    // }
+
+    // Renderiza gráfico de barras de despesas
+    function renderExpenseBarChart(response) {
+        const ctx = document.getElementById('expenseCategory').getContext('2d');
+
+        // Destruir o gráfico anterior, se existir
+        if (expenseBarChart) {
+            expenseBarChart.destroy();
+        }
+
+        if(response.original){
+            response = response.original
+        }
+
+        expenseBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: response,
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: {
-                        position: 'bottom',
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: (context) => `${context.dataset.label}: R$${context.raw}`
+                        }
+                    },
+                    datalabels: {
+                        anchor: 'center',
+                        align: 'center',
+                        color: '#000',
+                        font: { size: 10 },
+                        formatter: (value, context) => `${context.dataset.label}\nR$${value}`
                     }
-                }
-            }
+                },
+                scales: { y: { beginAtZero: true } }
+            },
+            plugins: [ChartDataLabels]
         });
     }
 
-    function updateBarChart(data) {
-        const expenseCategory = document.getElementById('expenseCategory').getContext('2d');
-        // Atualiza o gráfico de barras de despesas
-        // Aqui você precisa implementar a lógica para atualizar o gráfico existente com os novos dados
-    }
+    // Renderiza gráfico de barras de receitas
+    function renderRevenueBarChart(response) {
+        const ctx = document.getElementById('revenuesCategory').getContext('2d');
 
-    function updateRevenuesChart(data) {
-        const revenuesCategory = document.getElementById('revenuesCategory').getContext('2d');
-        // Atualiza o gráfico de barras de receitas
-        // Aqui você precisa implementar a lógica para atualizar o gráfico existente com os novos dados
-    }
-});
-
-
-$(document).ready(function() {
-    $('#filterHeader').on('click', function() {
-        const $filterBody = $('#filterBody');
-
-        // Verifica se o card está expandido ou não
-        if ($filterBody.css('max-height') === '0px') {
-            // Expande o card
-            $filterBody.css({
-                'padding': '1rem 1rem', // Define o padding ao expandir
-                'max-height': '200px' // Defina a altura máxima desejada
-            });
-        } else {
-            // Recolhe o card
-            $filterBody.css({
-                'padding': '0 1rem', // Reseta o padding ao recolher
-                'max-height': '0px' // Define o max-height para 0 ao recolher
-            });
+        // Destruir o gráfico anterior, se existir
+        if (revenueBarChart) {
+            revenueBarChart.destroy();
         }
-    });
-});
 
+        if(response.original){
+            response = response.original
+        }
 
+        revenueBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: response,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: (context) => `${context.dataset.label}: R$${context.raw}`
+                        }
+                    },
+                    datalabels: {
+                        anchor: 'center',
+                        align: 'center',
+                        color: '#000',
+                        font: { size: 10 },
+                        formatter: (value, context) => `${context.dataset.label}\nR$${value}`
+                    }
+                },
+                scales: { y: { beginAtZero: true } }
+            },
+            plugins: [ChartDataLabels]
+        });
+    }
+
+    function updateCharts(selectedType) {
+    $.ajax({
+            url: "{{ route('graphics.updateCharts') }}",
+            method: 'GET',
+            data: { type: selectedType },
+            success: function(response) {
+
+                console.log(response)
+                renderDoughnutChart(response.doughnutData);
+                renderExpenseBarChart(response.expenseData);
+                renderRevenueBarChart(response.revenueData);
+
+        
+                renderUpdateCards(response.cardsValuesData);
+            },
+            error: (err) => console.error('Erro ao buscar dados: ', err)
+        });
+    }
 
 </script>
