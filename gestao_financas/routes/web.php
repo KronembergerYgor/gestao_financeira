@@ -57,12 +57,15 @@ Route::middleware([checkAuth::class])->group(function () { //Autenticação de L
     });
     
     Route::prefix('home')->group(function () {
-        Route::get('/', [HomeController::class, 'index'])->name('home.index');
+        Route::match(['get', 'post'], '/', [HomeController::class, 'index'])->name('home.index');
+        Route::post('/Filter', [HomeController::class, 'filter'])->name('home.filter');
     });
         
     Route::prefix('graphics')->group(function () {
         Route::get('/ExpenseForCategory', [GraphicsController::class, 'values_expenses_for_category'])->name('graphics.expenseForCategory');
         Route::get('/RevenuesAndExpenses', [GraphicsController::class, 'values_revenues_and_expenses'])->name('graphics.revenuesAndExpenses');
+        Route::get('/RevenuesForCategory', [GraphicsController::class, 'values_revenues_for_category'])->name('graphics.revenuesForCategory');
+        Route::get('/update_charts', [GraphicsController::class, 'update_charts'])->name('graphics.updateCharts');
     });
 
     Route::prefix('SpaceProject')->group(function () {

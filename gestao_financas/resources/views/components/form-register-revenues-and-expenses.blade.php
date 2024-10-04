@@ -48,7 +48,7 @@
 
             <div class="input-group mb-4 mt-3">
                 <span class="input-group-text" id="basic-addon1"><i class="bi bi-currency-dollar"></i></span>
-                <input name="value" id="value" type="number" class="form-control" placeholder="Digite o Valor" aria-label="value" aria-describedby="basic-addon1" value="{{ old('value', isset($register) ? $register->value : '') }}">
+                <input name="value" id="value"  step="0.01" type="number" class="form-control" placeholder="Digite o Valor" aria-label="value" aria-describedby="basic-addon1" value="{{ old('value', isset($register) ? $register->value : '') }}">
             </div>
 
             <div class="input-group mb-4 mt-3">

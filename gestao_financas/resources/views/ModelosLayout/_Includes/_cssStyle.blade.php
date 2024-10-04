@@ -157,6 +157,7 @@
 
 .titlePage {
     margin: 2rem 2rem;
+    border: #999999 1px solid;
 
 }
 
@@ -168,12 +169,34 @@
 
 #boxCards {
         padding: 1rem 0rem; /* Ajuste o padding conforme necessário */
-    }
+}
 
 .cardContentText{
     width: 25.5rem;
+    border: #999999 1px solid;
 }
-  
+
+.cardGraphics{
+    border: #999999 1px solid;
+}
+
+/* ---- Filter Home Page --- */
+.boxFilter{
+       margin: 1rem 3.5rem !important;
+       border: #999999 1px solid;
+}
+
+.cardBodyFilter{
+    transition: max-height 0.5s ease, padding 0.5s ease; /* Ajuste o tempo para coincidir */
+    padding: 0 1rem; /* Padding inicial */
+    overflow: hidden; /* Garante que o conteúdo não transborde inicialmente */
+}
+
+#filterHeader{
+    cursor: pointer;
+}
+
+
 
 
 </style>

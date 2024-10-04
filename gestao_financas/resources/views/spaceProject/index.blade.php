@@ -8,8 +8,7 @@
 
 <div class="content" id="content">
 
-    <h1>Projetos</h1>
-    <hr>
+    <x-title-page title='Projetos' icon='<i class="bi bi-clipboard-data"></i>'/>
 
     <x-filter-space-projects route="spaceProject.index" />
  

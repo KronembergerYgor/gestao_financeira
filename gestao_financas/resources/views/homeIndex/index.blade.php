@@ -9,69 +9,59 @@
 
 
 <div class="content" id="content">
+    <x-title-page title='Início' icon='<i class="bi bi-house-fill"></i>'/>
 
-<x-title-page title='Início' icon='<i class="bi bi-house-fill"></i>'/>
+
+        <div class="boxFilter card text-center mb-3 d-flex flex-column p-0 shadow-lg"> 
+            <div class="m-0 card-header text-start fw-bold">
+                <h4 id="filterHeader" >
+                    <i class="bi bi-search"></i> Filtro
+                </h4>
+            </div>
+            <div class="cardBodyFilter card-body" id="filterBody" style="max-height: 0;">
+                <div class="d-flex align-items-center" action="#" method="POST">
+       
+                    
+                    
+                    <div class="input-group w-25 me-2"> <!-- Adiciona margem à direita -->
+                        <span class="input-group-text"><i class="bi bi-search"></i></span>
+                        <select name='type' id='type' class="form-select" aria-label="Default select example">
+                            <option selected disabled>selecione o Projeto</option>
+                            @foreach($projects as $project)
+                                <option value="{{$project->id}}">{{$project->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <button id="filterButton" class="btn btn-primary btn-sm">Filtrar</button>
+                
+                </div>
+
+            </div>
+        </div>
+    
 
 
     <div id="boxCards" class='row d-flex justify-content-around align-items-stretch mb-3'>
 
-        <!-- Card 1 -->
-        <div class="cardContentText card col-md-4 col-sm-12 mb-3 shadow-lg p-0">
-            <div class="card-header fw-bold">
-                <h5><i class="bi bi-currency-exchange"></i> Receita Geral</h5>
-            </div>
-            <div class="card-body text-center">
-                <h3>R$ {{$totals->receita_geral}}</h3> 
-            </div>
-        </div>
+        <x-card-value-home-page title='Receita Geral' icon='<i class="bi bi-currency-exchange"></i>' value='{{$totals->receita_geral}}' />
+        <x-card-value-home-page title='Despesas Geral' icon='<i class="bi bi-wallet2"></i>' value='{{$totals->despesa_geral}}' />
+        <x-card-value-home-page title='Saldo Geral' icon='<i class="bi bi-piggy-bank-fill"></i>' value='{{$totals->saldo}}' />
+       
+    </div>
 
-        <!-- Card 2 -->
-        <div class="cardContentText card col-md-4 col-sm-12 mb-3 shadow-lg p-0">
-          <div class="card-header fw-bold">
-            <h5><i class="bi bi-wallet2"></i> Despesas Geral</h5>
-        </div>
-            <div class="card-body text-center">
-              <h3>R$ {{$totals->despesa_geral}}</h3>
-            </div>
-        </div>
+    <div class='row d-flex justify-content-around align-items-stretch mb-3'>
 
-        <!-- Card 3 -->
-        <div class="cardContentText card col-md-4 col-sm-12 mb-3 shadow-lg p-0">
-          <div class="card-header fw-bold">
-            <h5><i class="bi bi-piggy-bank-fill"></i> Saldo Geral</h5>
-        </div>
-            <div class="card-body text-center">
-              <h3>R$ {{$totals->saldo}}</h3>
-            </div>
-        </div>
+        <x-card-graphics-home-page title='Despesas e Receita' icon='<i class="bi bi-cash-coin"></i>' idGraphic='expensesAndRecives' cols='col-md-11 col-sm-12' />
+
 
     </div>
 
     <div class='row d-flex justify-content-around align-items-stretch mb-3'>
 
-        <div class="card col-md-5 col-sm-12 text-center mb-3 d-flex flex-column p-0 shadow-lg"> 
-            <div class="m-0 card-header text-start fw-bold">
-                <i class="bi bi-cash-coin"></i> Despesas e Receita
-            </div>
-            <div class="card-body d-flex align-items-center justify-content-center">
-                <canvas id="expensesAndRecives" style="max-height: 300px; width: 100%;"></canvas>
-            </div>
-            <div class="card-footer text-body-secondary">
-                Atualizado recentemente
-            </div>
-        </div>
-
-        <div class="card col-md-5 col-sm-12 text-center mb-3 d-flex flex-column p-0 shadow-lg"> 
-            <div class="card-header text-start fw-bold">
-                <i class="bi bi-diagram-2-fill"></i> Despesas por Categoria
-            </div>
-            <div class="card-body d-flex align-items-center justify-content-center">
-                <canvas id="expenseCategory" style="max-height: 300px; width: 100%;"></canvas>
-            </div>
-            <div class="card-footer text-body-secondary">
-                Atualizado recentemente
-            </div>
-        </div>
+        <x-card-graphics-home-page title='Receita por Categoria' icon='<i class="bi bi-cash-coin"></i>' idGraphic='revenuesCategory' />
+            <x-card-graphics-home-page title='Despesas por Categoria' icon='<i class="bi bi-diagram-2-fill"></i>' idGraphic='expenseCategory' />
+        {{-- <x-card-graphics-home-page title='Despesas por Categoria' icon='<i class="bi bi-diagram-2-fill"></i>' idGraphic='expenseCategory' /> --}}
 
     </div>
 </div>

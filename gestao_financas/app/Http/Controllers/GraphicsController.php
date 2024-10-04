@@ -8,14 +8,14 @@ use Illuminate\Support\Facades\DB;
 
 class GraphicsController extends Controller
 {
-    public function values_expenses_for_category()
+    public function values_expenses_for_category($type=null)
     {
         $expensesForCategory = DB::table('space_projects')
         ->leftJoin('revenues_and_expenses', 'space_projects.id', '=', 'revenues_and_expenses.space_project_id')
         ->join('category_revenues_and_expenses', 'revenues_and_expenses.category_id', 'category_revenues_and_expenses.id')
         ->where('space_projects.responsible_user', Auth::user()->id)
         ->select('category_revenues_and_expenses.name')
-        ->selectRaw("FORMAT(SUM(IF(revenues_and_expenses.type = 'Despesa', revenues_and_expenses.value, 0)), 2) as despesa_geral")
+        ->selectRaw("FORMAT(SUM(IF(revenues_and_expenses.type = 'despesa', revenues_and_expenses.value, 0)), 2) as despesa_geral")
         ->having('despesa_geral','<>', 0 )
         ->groupBy(['revenues_and_expenses.category_id'])
         ->get();
@@ -24,12 +24,11 @@ class GraphicsController extends Controller
         foreach($expensesForCategory as $item){
             $dataset[] = [
                 'label' => $item->name,
-                'data' => $item->despesa_geral,
+                'data' => [$item->despesa_geral],
                 'borderWidth' => 1,
-                // 'backgroundColor'=> 'rgba(255, 99, 132, 0.2)',
-                // 'borderColor'=> 'rgba(255, 99, 132, 1)',  
-
-
+                'backgroundColor'=> 'rgba(255, 99, 132, 0.2)',
+                'borderColor'=> 'rgba(255, 99, 132, 1)',
+             
             ];
         }
 
@@ -42,20 +41,29 @@ class GraphicsController extends Controller
         return response()->json($data);
     }
 
-    public function values_revenues_and_expenses()
+    public function values_revenues_and_expenses($type=null)
     {
+
+        // dump($type);
+
         $totals = DB::table('space_projects')
         ->leftJoin('revenues_and_expenses', 'space_projects.id', '=', 'revenues_and_expenses.space_project_id')
         ->where('space_projects.responsible_user', Auth::user()->id)
         ->selectRaw("FORMAT(SUM(IF(revenues_and_expenses.type = 'Receita', revenues_and_expenses.value, 0)), 2) as receita_geral")
         ->selectRaw("FORMAT(SUM(IF(revenues_and_expenses.type = 'Despesa', revenues_and_expenses.value, 0)), 2) as despesa_geral")
-        ->selectRaw("FORMAT((SUM(IF(revenues_and_expenses.type = 'Receita', revenues_and_expenses.value, 0)) - SUM(IF(revenues_and_expenses.type = 'Despesa', revenues_and_expenses.value, 0))), 2) as saldo")
-        ->first();
+        ->selectRaw("FORMAT((SUM(IF(revenues_and_expenses.type = 'Receita', revenues_and_expenses.value, 0)) - SUM(IF(revenues_and_expenses.type = 'Despesa', revenues_and_expenses.value, 0))), 2) as saldo");
+
+
+        if(!empty($type)){
+            $totals = $totals->where('space_projects.id', $type);
+        }
+
+        $totals = $totals->first();
 
         $dataset = [];
         $dataset[] = [
             'label'=> ['Receita', 'Despesas'],
-            'data'=> [$totals->receita_geral, $totals->despesa_geral],
+            'data'=> [$totals->receita_geral,$totals->despesa_geral],
             'backgroundColor'=> [
                 'rgb(21 255 30 / 31%)',
                 'rgba(255, 99, 132, 0.2)',
@@ -74,6 +82,58 @@ class GraphicsController extends Controller
         ];
         
         return response()->json($data);
+    }
+
+    public function values_revenues_for_category($type=null)
+    {
+        $expensesForCategory = DB::table('space_projects')
+        ->leftJoin('revenues_and_expenses', 'space_projects.id', '=', 'revenues_and_expenses.space_project_id')
+        ->join('category_revenues_and_expenses', 'revenues_and_expenses.category_id', 'category_revenues_and_expenses.id')
+        ->where('space_projects.responsible_user', Auth::user()->id)
+        ->select('category_revenues_and_expenses.name')
+        ->selectRaw("FORMAT(SUM(IF(revenues_and_expenses.type = 'receita', revenues_and_expenses.value, 0)), 2) as receita_geral")
+        ->having('receita_geral','<>', 0 )
+        ->groupBy(['revenues_and_expenses.category_id'])
+        ->get();
+
+        $dataset = [];
+        foreach($expensesForCategory as $item){
+
+            $dataset[] = [
+                'label' => [$item->name],
+                'data' => [$item->receita_geral],
+                'borderWidth' => 1,
+                'backgroundColor'=> 'rgb(21 255 30 / 31%)',
+                'borderColor'=> 'rgb(3 117 8)',    
+            ];
+        }
+
+        // Aqui você pode coletar os dados do banco de dados.
+        $data = [
+            'labels' => ['Receita por categorias'],
+            'datasets' => $dataset
+        ];
+        
+        return response()->json($data);
+    }
+
+    public function update_charts(Request $request)
+    {
+        $type = $request->input('type');
+
+        // dump($request->type);
+
+        // Aqui você pode usar o tipo para filtrar os dados
+        $doughnutData = $this->values_revenues_and_expenses($request->type);
+        $expenseData = $this->values_expenses_for_category($request->type);
+        $revenueData = $this->values_revenues_for_category($request->type);
+
+        return response()->json([
+            // 'type' => $type,
+            'doughnutData' => $doughnutData,
+            'expenseData' => $expenseData,
+            'revenueData' => $revenueData,
+        ]);
     }
 
 
