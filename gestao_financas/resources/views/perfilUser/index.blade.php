@@ -14,7 +14,7 @@
         <x-title-forms-users title="Perfil" icon='<i class="bi bi-person-badge"></i>'></x-title-forms-users> <!-- Componente de titulo de formulário -->
         
         @if(isset($user->photo))
-            <img id='userPhoto' class='border rounded-circle ' src="{{ asset($user->photo)  }}" alt="Foto do Perfil">
+            <img id='userPhoto' class='border rounded-circle border-black ' src="{{ asset($user->photo)  }}" alt="Foto do Perfil">
         @else
             <i class="bi bi-person-circle" style="width: 150px; height: 150px; font-size:100px;"></i>
         @endif

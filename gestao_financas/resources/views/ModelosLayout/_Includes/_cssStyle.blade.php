@@ -25,7 +25,7 @@
         width: 100%
     }
 
-    .boxLogin form {
+    .boxLogin form .contentForm {
         padding: 1rem 5rem;
     }
 
@@ -70,7 +70,7 @@
     transition: opacity 0.3s ease;
 }
 
-.sidebar.collapsed h2 {
+.sidebar.collapsed h2, .sidebar.collapsed img, .sidebar.collapsed .defautPhoto, .sidebar.collapsed li {
     opacity: 0;
 }
 
@@ -79,7 +79,7 @@
 }
 
 .sidebar ul li {
-    margin: 20px 0;
+    margin: 1rem 0;
 }
 
 .sidebar ul li a {
@@ -87,12 +87,13 @@
     text-decoration: none;
     font-size: 18px;
     display: block;
-    transition: opacity 0.3s ease;
+    /* transition: opacity 1s ease; */
+    padding: 0.1rem
 }
 
 .sidebar ul li a:hover {
     background-color: #575757;
-    padding: 10px;
+    /* padding: 10px; */
     border-radius: 4px;
 }
 
