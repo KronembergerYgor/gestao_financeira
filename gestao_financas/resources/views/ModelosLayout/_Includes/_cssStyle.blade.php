@@ -248,4 +248,12 @@
     box-shadow: 0px 4px 13px #000000;
 }
 
+
+/* ------------Tabelas -----------*/
+
+.cardTable {
+    margin: 5rem 3.5rem !important;
+    border: #999999 1px solid;
+}
+
 </style>

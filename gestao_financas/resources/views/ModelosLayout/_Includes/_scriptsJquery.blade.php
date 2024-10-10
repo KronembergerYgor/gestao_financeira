@@ -18,7 +18,6 @@
             updateCharts(selectedType);
         });
 
-
         // Expande/recolhe o card de filtro
         $('#filterHeader').on('click', function() {
             const $filterBody = $('#filterBody');
@@ -26,7 +25,7 @@
 
             $filterBody.css({
                 'padding': isExpanded ? '0 1rem' : '1rem 1rem',
-                'max-height': isExpanded ? '0px' : '200px'
+                'max-height': isExpanded ? '0px' : '600px'
             });
         });
     });
