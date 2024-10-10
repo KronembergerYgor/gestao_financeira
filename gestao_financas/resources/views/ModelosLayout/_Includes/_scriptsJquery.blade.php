@@ -18,6 +18,7 @@
             updateCharts(selectedType);
         });
 
+
         // Expande/recolhe o card de filtro
         $('#filterHeader').on('click', function() {
             const $filterBody = $('#filterBody');
@@ -181,7 +182,6 @@
             data: { type: selectedType },
             success: function(response) {
 
-                console.log(response)
                 renderDoughnutChart(response.doughnutData);
                 renderExpenseBarChart(response.expenseData);
                 renderRevenueBarChart(response.revenueData);
@@ -190,5 +190,7 @@
             error: (err) => console.error('Erro ao buscar dados: ', err)
         });
     }
+
+
 
 </script>

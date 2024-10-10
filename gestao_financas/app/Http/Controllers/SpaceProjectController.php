@@ -75,7 +75,7 @@ class SpaceProjectController extends Controller
 
         }
 
-       return $projects->paginate(2); //Retornando consulta com paginação por 6 itens
+       return $projects->get(); //Retornando consulta com paginação por 6 itens
     }
 
 

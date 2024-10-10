@@ -200,4 +200,52 @@
 
 
 
+/* ------ Caixas projetos ---------*/
+.carousel-item {
+    transition: transform 0.5s ease;
+}
+
+.card {
+    margin: 0 auto; /* Centraliza o card */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    /* color: #000000; Cor do ícone do controle */
+    border-radius: 50%; /* Faz os ícones ficarem redondos */
+}
+
+.boxTextResumeProject{
+    border: 1px solid #c7c7c7;
+    border-radius: 6px;
+    margin: 0.1rem 4rem;
+    padding: 0.3rem;
+    /* box-shadow: 5px 2px 17px -4px; */
+}
+
+.bgc-revenue{
+    background-color: rgb(147, 196, 125);
+    color: #000;
+}
+
+.bgc-expense{
+    background-color: rgb(255 0 0 / 32%);
+    color: #000;
+}
+
+.bgc-balance{
+    background-color: rgb(109, 158, 235);
+    color: #fff;
+}
+
+.bgc-description-project{
+    background-color: rgb(238, 238, 238);
+    color: #000;
+}
+
+.cardProject{
+    border-radius: 15px;
+    box-shadow: 0px 4px 13px #000000;
+}
+
 </style>
