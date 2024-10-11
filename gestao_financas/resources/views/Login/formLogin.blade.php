@@ -1,18 +1,23 @@
 @if(!auth()->check()) <!-- Verificando se o usuário está logado -->
 
     <form action="{{route('login.enter')}}" method="POST">
-        @csrf <!-- Token CSRF para proteger contra ataques CSRF -->
-        <div class="input-group mb-4 mt-3"> <!-- área do input de email -->
-            <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-circle"></i></span>
-            <input name='email' id='email' type="email" class="form-control" placeholder="Digite seu e-mail" aria-label="email" aria-describedby="basic-addon1">
-        </div>
 
-        <div class="input-group mb-2"><!-- área do input de senha -->
-            <span class="input-group-text" id="basic-addon1"><i class="bi bi-key"></i></span>
-            <input name='password' id='password' type="password" class="form-control" placeholder="Digite sua senha" aria-label="password" aria-describedby="basic-addon1">
-        </div>
+        <div style=' padding: 1rem 5rem'>
 
-        <button type="submit" class="btn btn-primary mt-3 w-100">Entrar</button> <!-- área do botão de submit -->
+            @csrf <!-- Token CSRF para proteger contra ataques CSRF -->
+            <div class="input-group mb-4 mt-3"> <!-- área do input de email -->
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-circle"></i></span>
+                <input name='email' id='email' type="email" class="form-control" placeholder="Digite seu e-mail" aria-label="email" aria-describedby="basic-addon1">
+            </div>
+    
+            <div class="input-group mb-2"><!-- área do input de senha -->
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-key"></i></span>
+                <input name='password' id='password' type="password" class="form-control" placeholder="Digite sua senha" aria-label="password" aria-describedby="basic-addon1">
+            </div>
+
+
+        </div>
+        <button type="submit" class="btn btn-primary mt-1 w-25">Entrar</button> <!-- área do botão de submit -->
 
     </form>
 

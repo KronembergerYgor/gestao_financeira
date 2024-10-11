@@ -14,15 +14,17 @@ class FormRegisterRevenuesAndExpenses extends Component
     public $types;
     public $categorys;
     public $register;
+    public $titleButton;
 
-    public function __construct($route, $method, $spaceProjectId, $types, $categorys, $register = null)
+    public function __construct($route, $method, $spaceProjectId, $types, $categorys, $register = null, $titleButton = 'Cadastrar')
     {
-        $this->route            = $route;
-        $this->method           = $method;
-        $this->spaceProjectId   = $spaceProjectId;
+        $this->route             = $route;
+        $this->method            = $method;
+        $this->spaceProjectId    = $spaceProjectId;
         $this->types             = $types;
         $this->categorys         = $categorys;
-        $this->register         = $register;
+        $this->register          = $register;
+        $this->titleButton       = $titleButton;
 
     }
     /**

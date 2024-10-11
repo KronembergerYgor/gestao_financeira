@@ -21,6 +21,7 @@ class CategoryRevenuesAndExpenses extends Model
      protected $fillable = [
          'name',
          'description',
+         'user_category_id'
      ];
 
      public function revenuesAndExpensesId()

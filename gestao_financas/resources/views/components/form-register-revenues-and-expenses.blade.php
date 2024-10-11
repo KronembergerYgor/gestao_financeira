@@ -3,7 +3,8 @@
 
     @csrf 
     @method($method)
-    <div class="row">
+
+    <div class="row contentForm">
 
         <div class="col-6">
 
@@ -91,7 +92,11 @@
         </div>
 
     </div>
+    <hr>
+    <div class='d-flex justify-content-center'>
+        <input type="submit" class='btn btn-primary' value="{{$titleButton}}">
+        <button type="button" class="btn btn-outline-danger ms-2" onclick="history.back()">Cancelar</button>
 
-    <input type="submit" class='btn btn-primary' value="Cadastrar">
+    </div>
 
 </form>

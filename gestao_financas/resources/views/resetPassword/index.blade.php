@@ -7,6 +7,7 @@
 <x-alert></x-alert>     
 
 <div class="container d-flex align-items-center justify-content-center min-vh-100">
+    
 
     <div class='boxLogin border rounded shadow-lg p-5 w-50 m-5'>
         <x-button-back route='login.index'></x-button-back> <!-- Componente de botão para voltar -->

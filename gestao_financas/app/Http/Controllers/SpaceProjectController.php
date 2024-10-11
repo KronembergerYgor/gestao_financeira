@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\RecipeStatus;
+use App\Models\RevenuesAndExpenses;
 use App\Models\SpaceProject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -81,7 +82,14 @@ class SpaceProjectController extends Controller
 
     public function destroy($id){
         $registro = SpaceProject::findOrFail($id); // Localiza o registro pelo ID
-        // $registro->posts()->delete();
+
+       
+        $registersProject = RevenuesAndExpenses::select('id')->where('space_project_id', $id);
+
+        if(count($registersProject->get()) > 0){
+            $registersProject->delete();
+        }
+
         $registro->delete(); // Deleta o registro
 
         return redirect()->back()->with('success', 'Registro deletado com sucesso!');

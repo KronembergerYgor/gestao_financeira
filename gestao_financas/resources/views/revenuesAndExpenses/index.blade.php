@@ -7,10 +7,9 @@
 <x-menu-site></x-menu-site>
 
 <div class="content" id="content">
+    <x-alert></x-alert>
 
     <x-filter-revenues-and-expenses route="revenuesAndExpenses.index" idRoute={{$spaceProjectId}} :types="$types" :categorys="$categorys"/>
-
-    
 
     <div class='cardTable mx-5 px-5 py-4 bg-light rounded-2 mb-3 p-0 shadow-lg '>
 
@@ -89,12 +88,7 @@
             {{ $registers->links('pagination::bootstrap-4') }}
 
         </table>
-        
-    
-    
-    
     </div>    
-
 </div>
 
 

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\CategoryRevenuesAndExpenses;
+use App\Models\RevenuesAndExpenses;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -19,7 +21,7 @@ class CategoryController extends Controller
     {   
 
         // dd($request->all());
-        $categorys = CategoryRevenuesAndExpenses::select("*");
+        $categorys = CategoryRevenuesAndExpenses::select("*")->where('user_category_id', Auth::user()->id);
 
         if(isset($request->nameCategoryFilter)){
             $categorys = $categorys->where("name", "like", "%" . $request->nameCategoryFilter . "%");
@@ -56,6 +58,7 @@ class CategoryController extends Controller
         CategoryRevenuesAndExpenses::create([
             'name' => $request->nameCategory,
             'description' => $request->descriptionCategory,
+            'user_category_id' => Auth::user()->id
         ]);
         
 
@@ -65,7 +68,12 @@ class CategoryController extends Controller
 
     public function destroy($id){
         $registro = CategoryRevenuesAndExpenses::findOrFail($id); // Localiza o registro pelo ID
-        // $registro->posts()->delete();
+        $registersProject = RevenuesAndExpenses::select('id')->where('category_id', $id);
+
+        if(count($registersProject->get()) > 0){
+            $registersProject->delete();
+        }
+
         $registro->delete(); // Deleta o registro
 
         return redirect()->back()->with('success', 'Registro deletado com sucesso!');

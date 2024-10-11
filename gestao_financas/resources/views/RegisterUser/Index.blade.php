@@ -7,6 +7,7 @@
 <x-alert></x-alert>
 
 <div class="container d-flex align-items-center justify-content-center min-vh-100">
+    <x-alert></x-alert>
 
     <div class='boxLogin border rounded shadow-lg p-5 w-75 m-5'>    
 

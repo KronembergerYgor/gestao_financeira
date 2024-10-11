@@ -23,7 +23,7 @@ class RegisterController extends Controller
             'email'     => 'required|email|unique:users',
             'password'  => 'required',
             'confirmPassword' => 'required|same:password',
-            'imageUser' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'imageUser' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ], [
             'nameUser.required' => 'O nome deve ser obrigatório.',
             'email.required'    => 'O email deve ser obrigatório',

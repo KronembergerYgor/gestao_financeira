@@ -9,6 +9,7 @@
 <div class="content" id="content">
 
     <x-filter-space-projects route="spaceProject.index" />
+    <x-alert></x-alert>
 
     <div id="projectCarousel" class="carousel slide m-2 rounded-3" data-bs-ride="carousel">
 
@@ -98,7 +99,7 @@
     
                                         <x-modal-confirmation
                                             id="modal_delete_register_project_{{$project->id}}"
-                                            textDescription="Deseja confirmar com a exclusão do projeto <b>{{ $project->name }}</b>?"
+                                            textDescription="Deseja confirmar com a exclusão do projeto <b>{{ $project->name }}</b> com todos os registros contidos nele??"
                                             actionRoute="spaceProject.registerProject.destroy"
                                             method="POST"
                                             buttonClose="Cancelar"
