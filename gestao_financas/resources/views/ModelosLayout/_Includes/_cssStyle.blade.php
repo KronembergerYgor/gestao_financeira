@@ -6,6 +6,10 @@
         overflow-x: hidden; /* Esconde o scroll horizontal */
     }
 
+    hr{
+        height: 3px;
+    }
+
     /* ------------ Estilo body ------------ */
     body {
         background-color: #d5d5d5;
@@ -47,7 +51,7 @@
     /* --------Menu ------ */
 .sidebar {
     width: 250px;
-    background-color: #333;
+    background-color: #f8f8f8;
     color: #fff;
     height: 100vh;
     padding: 20px;
@@ -87,12 +91,12 @@
     text-decoration: none;
     font-size: 18px;
     display: block;
-    /* transition: opacity 1s ease; */
+    transition: opacity 1s ease;
     padding: 0.1rem
 }
 
 .sidebar ul li a:hover {
-    background-color: #575757;
+    background-color: #eeeeee;
     /* padding: 10px; */
     border-radius: 4px;
 }

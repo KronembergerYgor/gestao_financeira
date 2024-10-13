@@ -1,7 +1,7 @@
-<div class="sidebar" id="sidebar">
+<div class="sidebar shadow-lg" id="sidebar">
     <div class='row'>
         <div class='col-10 text-center '>
-            <a class='fs-5 text-decoration-none text-light' href="{{route('perfil.index')}}">
+            <a class='fs-5 text-decoration-none text-black' href="{{route('perfil.index')}}">
                 @if(isset(Auth::user()->photo))
                     <img  style="width: 100px; height: 100px;" id='userPhoto' class='border rounded-circle' src="{{ asset(Auth::user()->photo)  }}" alt="Foto do Perfil">
                 @else
@@ -16,16 +16,16 @@
             
         </div>
         <div class='col-2'>
-            <button class="toggle-btn"><i class="bi bi-list"></i></button>
+            <button class="toggle-btn bg-light"><i class="text-dark bi bi-list"></i></button>
         </div>
     </div>
     
     <ul>
-        <hr>
-        <li><a class='fs-5' href="{{route('home.index')}}"><i class="bi bi-house-door-fill"></i> Início</a></li>
-        <li><a class='fs-5' href="{{route('spaceProject.index')}}"><i class="bi bi-kanban"></i> Projetos</a></li>
-        <li><a class='fs-5' href="{{route('category.index')}}"><i class="bi bi-bookmark-fill"></i> Categorias</a></li>
-        <hr>
+        <hr class='bg-dark'>
+        <li><a class='fs-5 text-dark' href="{{route('home.index')}}"><i class="bi bi-house-door-fill"></i> Início</a></li>
+        <li><a class='fs-5 text-dark' href="{{route('spaceProject.index')}}"><i class="bi bi-kanban"></i> Projetos</a></li>
+        <li><a class='fs-5 text-dark' href="{{route('category.index')}}"><i class="bi bi-bookmark-fill"></i> Categorias</a></li>
+        <hr class='bg-dark'class='bg-dark'>
         <li>
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
