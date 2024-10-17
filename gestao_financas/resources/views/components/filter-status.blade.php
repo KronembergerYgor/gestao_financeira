@@ -1,4 +1,4 @@
-<div class="row border rounded p-3 m-auto">
+<div class="row border rounded p-3 mt-3 m-auto">
     <h4>Filtro</h4>
 
     <form action="{{route($route)}}" method="POST">

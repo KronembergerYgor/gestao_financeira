@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\CategoryRevenuesAndExpenses;
 use App\Models\RevenuesAndExpenses;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RevenuesAndExpensesController extends Controller
 {
     public function index(Request $request, $spaceProjectId)
     {   
 
-        $categorys = CategoryRevenuesAndExpenses::select("*")->get();
+        $categorys = CategoryRevenuesAndExpenses::select("*")->where('user_category_id', Auth::user()->id)->get();
         $types = [
             "Receita",
             "Despesa"
@@ -78,9 +79,7 @@ class RevenuesAndExpensesController extends Controller
             $projects = $projects->where('revenues_and_expenses.description', 'like', "%" . $request->descriptionFilter . "%");
         }
 
-
-
-       return $projects->paginate(10); //Retornando consulta com paginação por 6 itens
+       return $projects->paginate(7); //Retornando consulta com paginação por 6 itens
     } 
 
     public function create(Request $request, $spaceProjectId)
@@ -90,7 +89,7 @@ class RevenuesAndExpensesController extends Controller
             "Despesa"
         ];
         
-        $categorys = CategoryRevenuesAndExpenses::select("*")->get();
+        $categorys = CategoryRevenuesAndExpenses::select("*")->where('user_category_id', Auth::user()->id)->get();
 
         return view('revenuesAndExpenses.create', ["spaceProjectId" => $spaceProjectId, "categorys" => $categorys, "types" => $types]);
     }
@@ -143,7 +142,7 @@ class RevenuesAndExpensesController extends Controller
             "Despesa"
         ];
         
-        $categorys = CategoryRevenuesAndExpenses::select("*")->get();
+        $categorys = CategoryRevenuesAndExpenses::select("*")->where('user_category_id', Auth::user()->id)->get();
 
         return view('revenuesAndExpenses.edit', ['register' => $register, 'categorys' => $categorys, 'types' => $types, ]);
     }

@@ -1,5 +1,4 @@
-
-<div class="boxFilter card text-center mb-3 d-flex flex-column p-0 shadow-lg"> 
+<div class="boxFilter card text-center mb-3 mt-3 d-flex flex-column p-0 shadow-lg"> 
 
     <form action="#" method="POST">
         @csrf

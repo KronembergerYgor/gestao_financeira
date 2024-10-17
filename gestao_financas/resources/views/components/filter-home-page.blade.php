@@ -1,4 +1,4 @@
-<div class="boxFilter card text-center mb-3 d-flex flex-column p-0 shadow-lg"> 
+<div class="boxFilter card text-center mt-3 mb-3 d-flex flex-column p-0 shadow-lg"> 
 
     <div class="m-0 card-header text-start fw-bold">
         <h4 id="filterHeader"><i class="bi bi-search"></i> Filtro</h4>

@@ -187,8 +187,9 @@
 
 /* ---- Filter Home Page --- */
 .boxFilter{
-       margin: 1rem 3.5rem !important;
-       border: #999999 1px solid;
+
+    width: 93%;
+    border: #999999 1px solid;
 }
 
 .cardBodyFilter{

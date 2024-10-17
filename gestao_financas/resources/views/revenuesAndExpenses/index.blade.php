@@ -85,9 +85,10 @@
             
         
             </tbody>
-            {{ $registers->links('pagination::bootstrap-4') }}
+       
 
         </table>
+        {{ $registers->links('pagination::bootstrap-4') }}
     </div>    
 </div>
 
